@@ -11,9 +11,9 @@ public class Boulder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 5)
+    @Column(name = "idBoulder", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
-    private Long id;
+    private Long idBoulder;
 
     @Column(name = "name", nullable = false, length = 10)
     private String name; // TODO: pattern

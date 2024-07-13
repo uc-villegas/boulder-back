@@ -12,9 +12,9 @@ public class Route {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 5)
+    @Column(name = "idRoute", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
-    private Long id;
+    private Long idRoute;
 
     @Column(name = "name", nullable = false, length = 10)
     private String name; // TODO: pattern
@@ -25,11 +25,7 @@ public class Route {
     @Column(name = "color", nullable = false, length = 20)
     private String color; // TODO: enum
 
-    @Column(name = "phone", nullable = false, length = 20)
-    private String phone; // TODO: pattern
-
-    @Column(name = "phone2", nullable = true, length = 20)
-    private String phone2; // TODO: pattern
+    //TODO: Fecha de creacion (Para filtros)
 
     //TODO: @ManyToOne Rocodromo
 }

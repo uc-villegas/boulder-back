@@ -12,9 +12,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 5)
+    @Column(name = "idUser", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
-    private Long id;
+    private Long idUser;
 
     @Column(name = "name", nullable = false, length = 10)
     private String name; // TODO: pattern
@@ -23,7 +23,7 @@ public class User {
     private String surname; // TODO: pattern
 
     @Column(name = "mail", nullable = false, length = 20)
-    private String mail; // TODO: pattern
+    private String email; // TODO: pattern
 
     // TODO: ¿Videos?¿Galeria?
 
