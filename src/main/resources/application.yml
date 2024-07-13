@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: BoulderBackApplication
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/BoulderDB?currentSchema=boulder
+    username: pablo
+    password: pabloAdm
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 0
+      idle-timeout: 600000
+      schema: boulder
+      connection-timeout: 50000
+  jpa:
+    properties:
+      hibernate:
+        default_schema: boulder
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080
+  forward-headers-strategy: framework
+  shutdown: graceful
+
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate: INFO
+    com.tfg.boulder_back.BoulderBackApplication: INFO
