@@ -25,6 +25,9 @@ public class User {
     @Column(name = "mail", nullable = false, length = 20)
     private String email; // TODO: pattern
 
+    @Column(name = "password", nullable = false, length = 20)
+    private String password; // TODO: pattern
+
     // TODO: ¿Videos?¿Galeria?
 
 }
