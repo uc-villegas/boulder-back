@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.Date;
+import java.util.Set;
+
 @Entity
 @Table(name = "Route", schema = "boulder")
 @Data
@@ -12,7 +15,7 @@ public class Route {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idRoute", nullable = false, length = 5)
+    @Column(name = "id_route", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
     private Long idRoute;
 
@@ -25,7 +28,13 @@ public class Route {
     @Column(name = "color", nullable = false, length = 20)
     private String color; // TODO: enum
 
-    //TODO: Fecha de creacion (Para filtros)
+    @Column(name = "creationDate", nullable = false, length = 20)
+    private Date creationDate;
 
-    //TODO: @ManyToOne Rocodromo
+    @OneToMany(mappedBy = "route")
+    private Set<Video> videos;
+
+    @ManyToOne
+    @JoinColumn(name = "id_boulder")
+    private Boulder boulder;
 }

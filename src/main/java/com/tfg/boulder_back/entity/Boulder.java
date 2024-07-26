@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Boulder", schema = "boulder")
 @Data
@@ -11,7 +13,7 @@ public class Boulder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idBoulder", nullable = false, length = 5)
+    @Column(name = "id_boulder", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
     private Long idBoulder;
 
@@ -20,6 +22,9 @@ public class Boulder {
 
     @Column(name = "address", nullable = true, length = 10)
     private String address; // TODO: pattern
+
+    @Column(name = "locality", nullable = false, length = 20)
+    private String locality;
 
     @Column(name = "mail", nullable = false, length = 20)
     private String mail; // TODO: pattern
@@ -30,6 +35,7 @@ public class Boulder {
     @Column(name = "phone2", nullable = true, length = 20)
     private String phone2; // TODO: pattern
 
-    //TODO: @OneToMany Route
+    @OneToMany(mappedBy = "boulder")
+    private Set<Route> rutas;
 
 }
