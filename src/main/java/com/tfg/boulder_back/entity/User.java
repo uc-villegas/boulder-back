@@ -34,6 +34,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 20)
     private String password; // TODO: pattern
 
-    @OneToMany(mappedBy = "author")
-    private Set<Video> videos;
+//    @OneToMany(mappedBy = "author")
+//    private Set<Video> videos;
 }

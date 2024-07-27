@@ -17,7 +17,7 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_route", nullable = false, length = 5)
+    @Column(name = "id_video", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
     private Long id;
 

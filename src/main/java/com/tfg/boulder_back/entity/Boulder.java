@@ -21,22 +21,22 @@ public class Boulder {
     @Pattern(regexp = "\\d")
     private Long idBoulder;
 
-    @Column(name = "name", nullable = false, length = 10)
+    @Column(name = "name", nullable = false, length = 30)
     private String name; // TODO: pattern
 
-    @Column(name = "address", nullable = true, length = 10)
+    @Column(name = "address", nullable = true, length = 30)
     private String address; // TODO: pattern
 
-    @Column(name = "locality", nullable = false, length = 20)
+    @Column(name = "locality", nullable = false, length = 30)
     private String locality;
 
-    @Column(name = "mail", nullable = false, length = 20)
+    @Column(name = "mail", nullable = false, length = 30)
     private String mail; // TODO: pattern
 
-    @Column(name = "phone", nullable = false, length = 20)
+    @Column(name = "phone", nullable = false, length = 30)
     private String phone; // TODO: pattern
 
-    @Column(name = "phone2", nullable = true, length = 20)
+    @Column(name = "phone2", nullable = true, length = 30)
     private String phone2; // TODO: pattern
 
     @OneToMany(mappedBy = "boulder")
