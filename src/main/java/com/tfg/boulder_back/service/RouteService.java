@@ -1,5 +1,6 @@
 package com.tfg.boulder_back.service;
 
+import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.entity.Route;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface RouteService {
     List<Route> findAllRoutes();
     Route updateRoute(Route route);
     void deleteRoute(Long idRoute);
+    List<Route> findAllRoutesById(Long idBoulder);
+    Route addRouteAndLoadData(AddRouteRequest addRouteRequest);
 
 }

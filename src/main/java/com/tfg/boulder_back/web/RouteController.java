@@ -1,18 +1,21 @@
 package com.tfg.boulder_back.web;
 
-import com.tfg.boulder_back.entity.Boulder;
+import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.service.RouteService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/boulder")
+@RequestMapping("/api")
 public class RouteController {
+
+    private static final Logger log = LoggerFactory.getLogger(RouteController.class);
 
     private RouteService routeService;
 
@@ -20,13 +23,25 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-//    public ResponseEntity<Route> addRoute(@RequestBody Route newRoute, Boulder boulder) {
-//        try{
-//            //TODO: Comprobar si existe el boulder y la ruta en el boulder
-//            Route createdRoute = routeService.addRoute(newRoute);
-//            return new ResponseEntity<>(createdRoute, HttpStatus.CREATED);
-//        }catch(Exception e){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @GetMapping(value = "/v1/{idBoulder}/vias")
+    public ResponseEntity<List<Route>> getRoutes(@PathVariable Long idBoulder) {
+        log.info("getRoutes called");
+        try{
+            log.info("getRoutes called");
+            return new ResponseEntity<>(routeService.findAllRoutesById(idBoulder), HttpStatus.OK);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
+        }
+    }
+
+    @PostMapping(value = "/v1/boulder/via/enrollment")
+    public ResponseEntity<Route> addRoute(@RequestBody AddRouteRequest request) {
+        try{
+            log.info("addRoute called");
+            return new ResponseEntity<>(routeService.addRouteAndLoadData(request), HttpStatus.CREATED);
+        }catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
+        }
+    }
 }
