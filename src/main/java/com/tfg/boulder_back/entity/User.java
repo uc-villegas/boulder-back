@@ -2,17 +2,23 @@ package com.tfg.boulder_back.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 
 @Entity
 @Table(name = "User", schema = "boulder")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUser", nullable = false, length = 5)
+    @Column(name = "id_user", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
     private Long idUser;
 
@@ -28,6 +34,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 20)
     private String password; // TODO: pattern
 
-    // TODO: ¿Videos?¿Galeria?
-
+//    @OneToMany(mappedBy = "author")
+//    private Set<Video> videos;
 }
