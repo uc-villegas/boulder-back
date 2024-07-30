@@ -16,14 +16,7 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
      * @param idBoulder idBoulder de las vias
      * @return List<RouteDTO>
      */
-//    @Query(
-//            value =
-//                    "SELECT " +
-//                            "new com.tfg.boulder_back.entity.Route(r.idRoute, r.qrRoute, " +
-//                            "r.name, r.type, r.num_nivel, r.presa, r.creationDate, r.videos, r.boulder) " +
-//                    "FROM Route r " +
-//                    "WHERE r.boulder.idBoulder = 1"
-//    )
+
     @Query("SELECT r FROM Route r WHERE r.boulder.idBoulder = :idBoulder")
     List<Route> findAllByIdBoulder(@Param("idBoulder") Long idBoulder);
 }
