@@ -1,5 +1,6 @@
 package com.tfg.boulder_back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,7 @@ public class Boulder {
     @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$")
     private String phone2; // TODO: pattern
 
+    @JsonIgnore
     @OneToMany(mappedBy = "boulder", cascade = CascadeType.ALL)
     private Set<Route> routes;
 

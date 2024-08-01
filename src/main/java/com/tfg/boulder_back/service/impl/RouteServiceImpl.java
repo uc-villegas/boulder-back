@@ -4,6 +4,7 @@ import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.exceptions.BoulderNotFoundException;
+import com.tfg.boulder_back.exceptions.RouteNotFoundException;
 import com.tfg.boulder_back.repository.BoulderRepository;
 import com.tfg.boulder_back.repository.RouteRepository;
 import com.tfg.boulder_back.service.RouteService;
@@ -94,5 +95,23 @@ public class RouteServiceImpl implements RouteService {
 
         Boulder boulder = optionalBoulder.get();
         return routeRepository.findAllByIdBoulder(boulder.getIdBoulder());
+    }
+
+    @Override
+    public Route findByIdRouteIdBoulder(Long idBoulder, Long idRoute){
+
+        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
+
+        if (optionalBoulder.isEmpty()) {
+            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
+        }
+
+        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
+
+        if (optionalRoute.isEmpty()) {
+            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
+        }
+        
+        return optionalRoute.get();
     }
 }

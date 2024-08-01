@@ -1,6 +1,7 @@
 package com.tfg.boulder_back.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tfg.boulder_back.constants.Type;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,7 @@ public class Route {
     @OneToMany(mappedBy = "route")
     private Set<Video> videos;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_boulder", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

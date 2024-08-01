@@ -44,4 +44,14 @@ public class RouteController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
         }
     }
+
+    @GetMapping(value = "/v1/{idBoulder}/{idRoute}")
+    public ResponseEntity<Route> getRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute) {
+        try {
+            log.info("getRoute called");
+            return new ResponseEntity<>(routeService.findByIdRouteIdBoulder(idBoulder, idRoute), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

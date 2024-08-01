@@ -15,5 +15,6 @@ public interface RouteService {
     void deleteRoute(Long idRoute);
     List<Route> findAllRoutesById(Long idBoulder);
     Route addRouteAndLoadData(AddRouteRequest addRouteRequest);
+    Route findByIdRouteIdBoulder(Long idBoulder, Long idRoute);
 
 }
