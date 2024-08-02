@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class RouteController {
 
     private static final Logger log = LoggerFactory.getLogger(RouteController.class);
@@ -23,7 +23,7 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @GetMapping(value = "/v1/{idBoulder}/vias")
+    @GetMapping(value = "/boulder/{idBoulder}/routes")
     public ResponseEntity<List<Route>> getRoutes(@PathVariable Long idBoulder) {
         log.info("getRoutes called");
         try{
@@ -35,7 +35,7 @@ public class RouteController {
         }
     }
 
-    @PostMapping(value = "/v1/boulder/via/enrollment")
+    @PostMapping(value = "/boulder/via/enrollment")
     public ResponseEntity<Route> addRoute(@RequestBody AddRouteRequest request) {
         try{
             log.info("addRoute called");
@@ -45,7 +45,7 @@ public class RouteController {
         }
     }
 
-    @GetMapping(value = "/v1/{idBoulder}/{idRoute}")
+    @GetMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
     public ResponseEntity<Route> getRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute) {
         try {
             log.info("getRoute called");

@@ -1,5 +1,6 @@
 package com.tfg.boulder_back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -21,13 +22,13 @@ public class Video {
     @Pattern(regexp = "\\d")
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 10)
+    @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @Column(name = "description", nullable = false, length = 500)
+    @Column(name = "description", nullable = true, length = 500)
     private String description;
 
-    @Column(name = "url", nullable = false, length = 10)
+    @Column(name = "url", nullable = false, length = 100)
     private String url;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -35,6 +36,7 @@ public class Video {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_route", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -48,7 +48,7 @@
       "num_nivel": 2,
       "presa": "Naranja",
       "creationDate": "28-07-2024",
-      "videos": []
+      "videos": [MOSTRAR VIDEOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS, Y TAPAR/MOSTRAR LA LISTA CON UN CLICK]
       }
 
 
@@ -62,6 +62,7 @@
 ## Vista Trabajador
 
 - Get Vías: Para ver la lista de vías del rocódromo donde trabaja.
+  - Ver Get Vias Vista Cliente.
 
 
 - Post Via: Crear un nueva via del rocódromo donde trabaja.
