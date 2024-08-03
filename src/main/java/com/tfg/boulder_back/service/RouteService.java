@@ -11,6 +11,6 @@ public interface RouteService {
 
     List<RoutesDTO> findAllRoutesById(Long idBoulder);
     Route addRouteAndLoadData(AddRouteRequest addRouteRequest);
-    DetailedRouteDTO findByIdRouteIdBoulder(Long idBoulder, Long idRoute);
+    DetailedRouteDTO findByIdRouteNameBoulder(String nameBoulder, Long idRoute);
 
 }

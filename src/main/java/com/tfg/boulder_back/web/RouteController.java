@@ -45,12 +45,12 @@ public class RouteController {
         }
     }
 
-    @GetMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
-    public ResponseEntity<DetailedRouteDTO> getRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute) {
+    @GetMapping(value = "/boulder/{nameBoulder}/route/{idRoute}")
+    public ResponseEntity<DetailedRouteDTO> getRoute(@PathVariable String nameBoulder, @PathVariable Long idRoute) {
 
         log.info("getRoute called");
         try {
-            DetailedRouteDTO route = routeService.findByIdRouteIdBoulder(idBoulder, idRoute);
+            DetailedRouteDTO route = routeService.findByIdRouteNameBoulder(nameBoulder, idRoute);
             return new ResponseEntity<>(route, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

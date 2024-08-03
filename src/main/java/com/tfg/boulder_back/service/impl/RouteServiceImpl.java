@@ -73,13 +73,13 @@ public class RouteServiceImpl implements RouteService {
         return routes.stream().map(this::convertToRoutesDTO).collect(Collectors.toList());    }
 
     @Override
-    public DetailedRouteDTO findByIdRouteIdBoulder(Long idBoulder, Long idRoute){
+    public DetailedRouteDTO findByIdRouteNameBoulder(String nameBoulder, Long idRoute){
 
         DetailedRouteDTO detailedRouteDTO = new DetailedRouteDTO();
 
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
+        Optional<Boulder> optionalBoulder = boulderRepository.findByName(nameBoulder);
         if (optionalBoulder.isEmpty()) {
-            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
+            throw new BoulderNotFoundException("Boulder not found with the name: " + nameBoulder);
         }
 
         Optional<Route> optionalRoute = routeRepository.findById(idRoute);
