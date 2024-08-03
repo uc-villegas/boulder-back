@@ -22,7 +22,7 @@ public class Video {
     @Pattern(regexp = "\\d")
     private Long id;
 
-    @Column(name = "title", nullable = false, length = 50)
+    @Column(name = "title", nullable = false, length = 100)
     private String title;
 
     @Column(name = "description", nullable = true, length = 500)

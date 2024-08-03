@@ -1,5 +1,26 @@
 # Contratos Front-Back
 
+## Vista Invitado
+
+- Post Usuario: El invitado podrá crearse un usuario para poder subir videos.
+    - POST http://localhost:8080/api/v1/user/enrollment
+    - JSON Request
+      {
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "password": "pass"
+      }
+
+    - JSON Response
+      {
+      "idUser": 1,
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "password": "pass"
+      }
+
 ## Vista Cliente
 
 - Get Rocódromos: Al dar al botón ver rocódromos. Para ver la lista de rocódromos.
@@ -9,55 +30,119 @@
       [
       {
       "idBoulder": 1,
-      "name": "Treparriscos",
-      "address": "C/Malasaña, 42",
-      "locality": "Maliaño",
-      "mail": "trepa@gmail.com",
-      "phone": "942 111 111",
+      "name": "RascaMuros",
+      "address": "C/Santa Lucia, 22",
+      "locality": "Muriedas",
+      "mail": "RascaMuros@gmail.com",
+      "phone": "942 222 222",
       "phone2": null
       }
       ]
 
 
 - Get Vias: Para ver la lista de vías de un rocódromo seleccionado.
-    - GET http://localhost:8080/api/v1/{idBoulder}/vias
+    - GET http://localhost:8080/api/v1/boulder/{idBoulder}/routes
 
     - JSON Response
       [
       {
       "idRoute": 1,
-      "qrRoute": "Treparriscos/1",
+      "qrRoute": "Rascamuros/1",
       "name": "Via 1",
       "type": "BOULDER",
       "num_nivel": 1,
-      "presa": "Azul",
-      "creationDate": "2024-07-28"
-      }, ...
+      "presa": "Naranja",
+      "creationDate": "2024-08-03T08:41:47.767+00:00"
+      } ...
       ]
 
 
 - Get Vía: Para ver los datos de la via clickada, incluida su biblio de videos. Además, a través del QR, dependiendo del dato leído, haremos un getVia para mostrar sus datos y videos.
-    - GET http://localhost:8080/api/v1/{idBoulder}/{idRoute}
+    - GET http://localhost:8080/api/v1/boulder/{idBoulder}/route/{idRoute}
 
     - JSON Response
       {
-      "idRoute": 17,
+      "idRoute": 1,
       "qrRoute": "Rascamuros/1",
-      "name": "Via 2",
+      "name": "Via 1",
       "type": "BOULDER",
-      "num_nivel": 2,
+      "num_nivel": 1,
       "presa": "Naranja",
-      "creationDate": "28-07-2024",
-      "videos": [MOSTRAR VIDEOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS, Y TAPAR/MOSTRAR LA LISTA CON UN CLICK]
+      "creationDate": "2024-08-03T08:41:47.767+00:00",
+      "videos": [
+      {
+      "id": 1,
+      "title": "MiVideo_1_Titulo",
+      "description": "Escalando via 1",
+      "url": "youtube.com"
+      }
+      ]
       }
 
 
 - Get Usuario: Para ver los videos que ha subido un usuario. En la lista de videos puede hacer click en su nombre.
-    - GET http://localhost:8080/api/v1/{usuario}
+    - GET http://localhost:8080/api/v1/users/{idUser}
+    
+    - JSON Response
+      {
+      "idUser": 1,
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "videos": [
+      {
+      "id": 1,
+      "title": "MiVideo_1_Titulo",
+      "description": "Escalando via 1",
+      "url": "youtube.com"
+      }
+      ]
+      }
 
 
 - Post Video: Un usuario podrá subir un video de una via, mediante un botón.
-    - POST http://localhost:8080/api/v1/{idBoulder}/{idRoute}
+    - POST http://localhost:8080/api/v1/boulder/via/video/add?userId=1
+
+    - JSON Request
+     {
+      "title": "MiVideo_1_Titulo",
+      "description": "Escalando via 1",
+      "url": "youtube.com",
+      "idRoute": "1"
+      }
+
+    - JSON Response
+      {
+      "id": 1,
+      "title": "MiVideo_1_Titulo",
+      "description": "Escalando via 1",
+      "url": "youtube.com",
+      "user": {
+      "idUser": 1,
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "password": "pass"
+      },
+      "route": {
+      "idRoute": 1,
+      "qrRoute": "Rascamuros/1",
+      "name": "Via 1",
+      "type": "BOULDER",
+      "num_nivel": 1,
+      "presa": "Naranja",
+      "creationDate": "2024-08-03T08:41:47.767+00:00",
+      "boulder": {
+      "idBoulder": 1,
+      "name": "RascaMuros",
+      "address": "C/Santa Lucia, 22",
+      "locality": "Muriedas",
+      "mail": "RascaMuros@gmail.com",
+      "phone": "942 222 222",
+      "phone2": null
+      }
+      }
+      }
 
 ## Vista Trabajador
 
@@ -72,11 +157,31 @@
     - JSON Request
       {
       "idBoulder": "1",
-      "qrRoute": "Treparriscos/1",
+      "qrRoute": "Rascamuros/1",
       "name": "Via 1",
       "type": "BOULDER",
       "num_nivel": 1,
-      "presa": "Azul"
+      "presa": "Naranja"
+      }
+
+    - JSON Response
+      {
+      "idRoute": 1,
+      "qrRoute": "Rascamuros/1",
+      "name": "Via 1",
+      "type": "BOULDER",
+      "num_nivel": 1,
+      "presa": "Naranja",
+      "creationDate": "2024-08-03T08:41:47.767+00:00",
+      "boulder": {
+      "idBoulder": 1,
+      "name": "RascaMuros",
+      "address": "C/Santa Lucia, 22",
+      "locality": "Muriedas",
+      "mail": "RascaMuros@gmail.com",
+      "phone": "942 222 222",
+      "phone2": null
+      }
       }
 
 
@@ -96,21 +201,20 @@
 
     - JSON Request
       {
-      "name": "Rompemuros",
-      "address": "C/Malasaña, 42",
-      "locality": "Santander",
-      "mail": "rompe@gmail.com",
-      "phone": "942 111 111"
+      "name": "RascaMuros",
+      "address": "C/Santa Lucia, 22",
+      "locality": "Muriedas",
+      "mail": "RascaMuros@gmail.com",
+      "phone": "942 222 222"
       }
 
     - JSON Response
       {
-      "idBoulder": 2,
-      "name": "Rompemuros",
-      "address": "C/Malasaña, 42",
-      "locality": "Santander",
-      "mail": "rompe@gmail.com",
-      "phone": "942 111 111",
-      "phone2": null,
-      "rutas": null
+      "idBoulder": 1,
+      "name": "RascaMuros",
+      "address": "C/Santa Lucia, 22",
+      "locality": "Muriedas",
+      "mail": "RascaMuros@gmail.com",
+      "phone": "942 222 222",
+      "phone2": null
       }

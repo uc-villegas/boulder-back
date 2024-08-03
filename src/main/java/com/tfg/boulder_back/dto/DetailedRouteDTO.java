@@ -20,5 +20,5 @@ public class DetailedRouteDTO {
     private int num_nivel; // numerico
     private String presa; // Colores
     private Date creationDate;
-    private List<VideoDTO> videos;
+    private List<DetailedVideoDTO> videos;
 }

@@ -23,23 +23,23 @@ public class Route {
     @Column(name = "id_route", nullable = false, length = 5)
     private Long idRoute;
 
-    @Column(name = "qr", nullable = false)
+    @Column(name = "qr", nullable = false, length = 50)
     private String qrRoute;
 
-    @Column(name = "name", nullable = false, length = 10)
+    @Column(name = "name", nullable = false, length = 50)
     private String name; // TODO: pattern
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private Type type;
 
-    @Column(name = "num_nivel", nullable = false, length = 10)
+    @Column(name = "num_nivel", nullable = false, length = 50)
     private int num_nivel; // numerico
 
-    @Column(name = "presa", nullable = false, length = 20)
+    @Column(name = "presa", nullable = false, length = 50)
     private String presa; // Colores
 
-    @Column(name = "creationDate", nullable = false, length = 20, updatable = false)
+    @Column(name = "creationDate", nullable = false, length = 50, updatable = false)
     private Date creationDate;
 
     //@OneToMany(mappedBy = "route", fetch = FetchType.LAZY)

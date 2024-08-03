@@ -1,10 +1,7 @@
 package com.tfg.boulder_back.service.impl;
 
 import com.tfg.boulder_back.domain.request.AddRouteRequest;
-import com.tfg.boulder_back.dto.DetailedRouteDTO;
-import com.tfg.boulder_back.dto.RoutesDTO;
-import com.tfg.boulder_back.dto.UserDTO;
-import com.tfg.boulder_back.dto.VideoDTO;
+import com.tfg.boulder_back.dto.*;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.Video;
@@ -12,17 +9,13 @@ import com.tfg.boulder_back.exceptions.BoulderNotFoundException;
 import com.tfg.boulder_back.exceptions.RouteNotFoundException;
 import com.tfg.boulder_back.repository.BoulderRepository;
 import com.tfg.boulder_back.repository.RouteRepository;
-import com.tfg.boulder_back.repository.UserRepository;
+import com.tfg.boulder_back.repository.VideoRepository;
 import com.tfg.boulder_back.service.RouteService;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +29,7 @@ public class RouteServiceImpl implements RouteService {
     private BoulderRepository boulderRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private VideoRepository videoRepository;
 
 
     @Override
@@ -59,11 +52,8 @@ public class RouteServiceImpl implements RouteService {
         route.setCreationDate(new Date());
         route.setNum_nivel(routeRequest.getNum_nivel());
         route.setBoulder(boulder);
-        //route.setVideos(new HashSet<>());
 
         routeRepository.save(route);
-        //boulder.getRoutes().add(route);
-        //route.setBoulder(boulder);
         boulderRepository.save(boulder);
 
         return route;
@@ -78,7 +68,6 @@ public class RouteServiceImpl implements RouteService {
             throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
         }
 
-        Boulder boulder = optionalBoulder.get();
         List<Route> routes = routeRepository.findAllByIdBoulder(idBoulder);
 
         return routes.stream().map(this::convertToRoutesDTO).collect(Collectors.toList());    }
@@ -86,8 +75,9 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public DetailedRouteDTO findByIdRouteIdBoulder(Long idBoulder, Long idRoute){
 
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
+        DetailedRouteDTO detailedRouteDTO = new DetailedRouteDTO();
 
+        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
         if (optionalBoulder.isEmpty()) {
             throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
         }
@@ -97,8 +87,22 @@ public class RouteServiceImpl implements RouteService {
         if (optionalRoute.isEmpty()) {
             throw new RouteNotFoundException("Route not found with ID: " + idRoute);
         }
-        
-        return convertToDetailedRouteDTO(optionalRoute.get());
+
+        Route route = optionalRoute.get();
+        List<Video> videos = videoRepository.findAllById(Collections.singleton(idRoute)); // TODO: revisar repository, aqui se busca por idRoute, en UserServiceImpl se busca por idUser.
+
+        detailedRouteDTO.setIdRoute(route.getIdRoute());
+        detailedRouteDTO.setName(route.getName());
+        detailedRouteDTO.setQrRoute(route.getQrRoute());
+        detailedRouteDTO.setCreationDate(route.getCreationDate());
+        detailedRouteDTO.setPresa(route.getPresa());
+        detailedRouteDTO.setType(route.getType());
+        detailedRouteDTO.setNum_nivel(route.getNum_nivel());
+
+        List<DetailedVideoDTO> detailedVideosDTO = videos.stream().map(this::convertToDetailedVideoDTO).toList();
+        detailedRouteDTO.setVideos(detailedVideosDTO);
+
+        return detailedRouteDTO;
     }
 
 
@@ -114,30 +118,12 @@ public class RouteServiceImpl implements RouteService {
         return dto;
     }
 
-    private DetailedRouteDTO convertToDetailedRouteDTO(Route route) {
-        DetailedRouteDTO dto = new DetailedRouteDTO();
-        dto.setIdRoute(route.getIdRoute());
-        dto.setQrRoute(route.getQrRoute());
-        dto.setName(route.getName());
-        dto.setType(route.getType());
-        dto.setNum_nivel(route.getNum_nivel());
-        dto.setPresa(route.getPresa());
-        dto.setCreationDate(route.getCreationDate());
-        //dto.setVideos(route.getVideos().stream().map(this::convertToVideoDTO).collect(Collectors.toList()));
-        return dto;
-    }
-
-    private VideoDTO convertToVideoDTO(Video video) {
-        VideoDTO dto = new VideoDTO();
+    private DetailedVideoDTO convertToDetailedVideoDTO(Video video) {
+        DetailedVideoDTO dto = new DetailedVideoDTO();
         dto.setId(video.getId());
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
-
-        UserDTO userDTO = new UserDTO();
-        userDTO.setIdUser(video.getUser().getIdUser());
-        userDTO.setName(video.getUser().getName());
-        dto.setUser(userDTO);
 
         return dto;
     }

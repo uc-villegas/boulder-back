@@ -23,24 +23,24 @@ public class Boulder {
     @Column(name = "id_boulder", nullable = false, length = 5)
     private Long idBoulder;
 
-    @Column(name = "name", nullable = false, length = 30)
+    @Column(name = "name", nullable = false, length = 50)
     private String name; // TODO: pattern
 
-    @Column(name = "address", nullable = true, length = 30)
+    @Column(name = "address", nullable = true, length = 50)
     private String address; // TODO: pattern
 
-    @Column(name = "locality", nullable = false, length = 30)
+    @Column(name = "locality", nullable = false, length = 50)
     private String locality;
 
-    @Column(name = "mail", nullable = false, length = 30)
+    @Column(name = "mail", nullable = false, length = 50)
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
     private String mail; // TODO: pattern
 
-    @Column(name = "phone", nullable = false, length = 30)
+    @Column(name = "phone", nullable = false, length = 50)
     @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$")
     private String phone; // TODO: pattern
 
-    @Column(name = "phone2", nullable = true, length = 30)
+    @Column(name = "phone2", nullable = true, length = 50)
     @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$")
     private String phone2; // TODO: pattern
 
