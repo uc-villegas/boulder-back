@@ -25,22 +25,8 @@ public class BoulderServiceImpl implements BoulderService {
     }
 
     @Override
-    public Optional<Boulder> findByIdBoulder(Long idBoulder) {
-        return Optional.empty();
-    }
-
-    @Override
     public List<Boulder> findAllBoulders() {
         return boulderRepository.findAll();
     }
 
-    @Override
-    public Boulder updateBoulder(Boulder boulder) {
-        return null;
-    }
-
-    @Override
-    public void deleteBoulder(Long idBoulder) {
-
-    }
 }

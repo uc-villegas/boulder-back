@@ -1,10 +1,13 @@
 package com.tfg.boulder_back.web;
 
 import com.tfg.boulder_back.domain.request.AddRouteRequest;
+import com.tfg.boulder_back.dto.DetailedRouteDTO;
+import com.tfg.boulder_back.dto.RoutesDTO;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +20,15 @@ public class RouteController {
 
     private static final Logger log = LoggerFactory.getLogger(RouteController.class);
 
+    @Autowired
     private RouteService routeService;
 
-    public RouteController(RouteService routeService) {
-        this.routeService = routeService;
-    }
-
     @GetMapping(value = "/boulder/{idBoulder}/routes")
-    public ResponseEntity<List<Route>> getRoutes(@PathVariable Long idBoulder) {
+    public ResponseEntity<List<RoutesDTO>> getRoutes(@PathVariable Long idBoulder) {
         log.info("getRoutes called");
         try{
-            log.info("getRoutes called");
-            return new ResponseEntity<>(routeService.findAllRoutesById(idBoulder), HttpStatus.OK);
+            List<RoutesDTO> routes = routeService.findAllRoutesById(idBoulder);
+            return new ResponseEntity<>(routes, HttpStatus.OK);
         }catch (Exception e){
             log.error(e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
@@ -46,12 +46,14 @@ public class RouteController {
     }
 
     @GetMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
-    public ResponseEntity<Route> getRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute) {
+    public ResponseEntity<DetailedRouteDTO> getRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute) {
+
+        log.info("getRoute called");
         try {
-            log.info("getRoute called");
-            return new ResponseEntity<>(routeService.findByIdRouteIdBoulder(idBoulder, idRoute), HttpStatus.OK);
+            DetailedRouteDTO route = routeService.findByIdRouteIdBoulder(idBoulder, idRoute);
+            return new ResponseEntity<>(route, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 }

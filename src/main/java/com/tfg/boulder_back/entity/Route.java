@@ -42,10 +42,9 @@ public class Route {
     @Column(name = "creationDate", nullable = false, length = 20, updatable = false)
     private Date creationDate;
 
-    @OneToMany(mappedBy = "route")
-    private Set<Video> videos;
+    //@OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    //private Set<Video> videos;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_boulder", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

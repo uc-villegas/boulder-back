@@ -36,7 +36,6 @@ public class Video {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_route", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

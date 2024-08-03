@@ -12,6 +12,7 @@ import com.tfg.boulder_back.repository.UserRepository;
 import com.tfg.boulder_back.repository.VideoRepository;
 import com.tfg.boulder_back.service.VideoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,15 +22,14 @@ import java.util.Optional;
 @Slf4j
 public class VideoServiceImpl implements VideoService {
 
-    private final VideoRepository videoRepository;
-    private final RouteRepository routeRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private VideoRepository videoRepository;
 
-    public VideoServiceImpl(VideoRepository videoRepository, RouteRepository routeRepository, UserRepository userRepository) {
-        this.videoRepository = videoRepository;
-        this.routeRepository = routeRepository;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private RouteRepository routeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Video addVideo(AddVideoRequest videoRequest, Long userId) {
@@ -53,18 +53,11 @@ public class VideoServiceImpl implements VideoService {
         videoToAdd.setTitle(videoRequest.getTitle());
         videoToAdd.setUrl(videoRequest.getUrl());
 
-
-
-        routeRepository.save(route);
-        userRepository.save(user);
+        //routeRepository.save(route);
+        //userRepository.save(user);
         videoRepository.save(videoToAdd);
 
         return videoToAdd;
-    }
-
-    @Override
-    public Video getVideo(int id) {
-        return null;
     }
 
     @Override
@@ -72,18 +65,4 @@ public class VideoServiceImpl implements VideoService {
         return videoRepository.findAll();
     }
 
-    @Override
-    public List<Video> getVideosByUser(int id) {
-        return List.of();
-    }
-
-    @Override
-    public Video updateVideo(Video video) {
-        return null;
-    }
-
-    @Override
-    public void deleteVideo(int id) {
-
-    }
 }

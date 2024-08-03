@@ -6,6 +6,7 @@ import com.tfg.boulder_back.service.RouteService;
 import com.tfg.boulder_back.service.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,18 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class VideoController {
 
     private static final Logger log = LoggerFactory.getLogger(VideoController.class);
 
+    @Autowired
     private VideoService videoService;
 
-    public VideoController(VideoService videoService) {
-        this.videoService = videoService;
-    }
-
-    @PostMapping(value = "v1/boulder/via/video/add")
+    @PostMapping(value = "/boulder/via/video/add")
     public ResponseEntity<Video> addVideo(@RequestBody AddVideoRequest video, @RequestParam Long userId) {
         log.info("Adding video: {}", video.getUrl());
         try{
@@ -34,7 +32,7 @@ public class VideoController {
         }
     }
 
-    @GetMapping(value = "v1/videos")
+    @GetMapping(value = "/videos")
     public ResponseEntity<List<Video>> getAllVideos() {
         log.info("Getting all videos");
         return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);

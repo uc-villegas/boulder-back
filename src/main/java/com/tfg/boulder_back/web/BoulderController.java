@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class BoulderController {
 
     private static final Logger log = LoggerFactory.getLogger(BoulderController.class);
@@ -24,7 +24,7 @@ public class BoulderController {
         this.boulderService = boulderService;
     }
 
-    @GetMapping("/v1/boulders")
+    @GetMapping("/boulders")
     public ResponseEntity<List<Boulder>> getAllBoulders() {
         log.info("getAllBoulders");
         try{
@@ -36,7 +36,7 @@ public class BoulderController {
         }
     }
 
-    @PostMapping("/v1/boulder/enrollment")
+    @PostMapping("/boulder/enrollment")
     public ResponseEntity<Boulder> createBoulder(@RequestBody Boulder boulder) {
         log.info("createBoulder");
         try {

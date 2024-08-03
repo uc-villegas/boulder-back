@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -34,6 +35,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 20)
     private String password; // TODO: pattern
 
-    @OneToMany(mappedBy = "user")
-    private Set<Video> videos;
+    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    //private Set<Video> videos = new HashSet<>();
 }
