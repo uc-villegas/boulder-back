@@ -1,15 +1,13 @@
 package com.tfg.boulder_back.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tfg.boulder_back.constants.Type;
+import com.tfg.boulder_back.constants.TypeRoute;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "Route", schema = "boulder")
@@ -31,7 +29,7 @@ public class Route {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private Type type;
+    private TypeRoute typeRoute;
 
     @Column(name = "num_nivel", nullable = false, length = 50)
     private int num_nivel; // numerico

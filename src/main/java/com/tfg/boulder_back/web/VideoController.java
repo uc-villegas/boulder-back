@@ -2,7 +2,6 @@ package com.tfg.boulder_back.web;
 
 import com.tfg.boulder_back.domain.request.AddVideoRequest;
 import com.tfg.boulder_back.entity.Video;
-import com.tfg.boulder_back.service.RouteService;
 import com.tfg.boulder_back.service.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

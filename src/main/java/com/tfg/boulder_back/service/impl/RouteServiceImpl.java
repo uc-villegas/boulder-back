@@ -47,7 +47,7 @@ public class RouteServiceImpl implements RouteService {
         Route route = new Route();
         route.setQrRoute(routeRequest.getQrRoute());
         route.setName(routeRequest.getName());
-        route.setType(routeRequest.getType());
+        route.setTypeRoute(routeRequest.getTypeRoute());
         route.setPresa(routeRequest.getPresa());
         route.setCreationDate(new Date());
         route.setNum_nivel(routeRequest.getNum_nivel());
@@ -96,7 +96,7 @@ public class RouteServiceImpl implements RouteService {
         detailedRouteDTO.setQrRoute(route.getQrRoute());
         detailedRouteDTO.setCreationDate(route.getCreationDate());
         detailedRouteDTO.setPresa(route.getPresa());
-        detailedRouteDTO.setType(route.getType());
+        detailedRouteDTO.setTypeRoute(route.getTypeRoute());
         detailedRouteDTO.setNum_nivel(route.getNum_nivel());
 
         List<DetailedVideoDTO> detailedVideosDTO = videos.stream().map(this::convertToDetailedVideoDTO).toList();
@@ -111,7 +111,7 @@ public class RouteServiceImpl implements RouteService {
         dto.setIdRoute(route.getIdRoute());
         dto.setQrRoute(route.getQrRoute());
         dto.setName(route.getName());
-        dto.setType(route.getType());
+        dto.setTypeRoute(route.getTypeRoute());
         dto.setNum_nivel(route.getNum_nivel());
         dto.setPresa(route.getPresa());
         dto.setCreationDate(route.getCreationDate());

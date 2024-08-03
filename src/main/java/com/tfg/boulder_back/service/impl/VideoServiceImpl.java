@@ -6,7 +6,6 @@ import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.exceptions.RouteNotFoundException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
-import com.tfg.boulder_back.exceptions.VideoNotFoundException;
 import com.tfg.boulder_back.repository.RouteRepository;
 import com.tfg.boulder_back.repository.UserRepository;
 import com.tfg.boulder_back.repository.VideoRepository;

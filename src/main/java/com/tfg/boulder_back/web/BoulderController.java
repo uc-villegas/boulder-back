@@ -2,7 +2,6 @@ package com.tfg.boulder_back.web;
 
 
 import com.tfg.boulder_back.entity.Boulder;
-import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.service.BoulderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
