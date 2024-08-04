@@ -91,9 +91,9 @@ public class RouteServiceImpl implements RouteService {
         DetailedBoulderDTO boulder = converToDetailedBoulderDTO(optionalBoulder.get());
 
         Route route = optionalRoute.get();
-        List<Video> videos = videoRepository.findAllById(Collections.singleton(idRoute)); // TODO: revisar repository, aqui se busca por idRoute, en UserServiceImpl se busca por idUser.
+        List<Video> videos = videoRepository.findByRouteId(idRoute); // TODO: revisar repository, aqui se busca por idRoute, en UserServiceImpl se busca por idUser.
 
-        detailedRouteDTO.setIdRoute(route.getIdRoute());
+        detailedRouteDTO.setIdRoute(route.getId());
         detailedRouteDTO.setName(route.getName());
         detailedRouteDTO.setQrRoute(route.getQrRoute());
         detailedRouteDTO.setCreationDate(route.getCreationDate());
@@ -112,7 +112,7 @@ public class RouteServiceImpl implements RouteService {
 
     private RoutesDTO convertToRoutesDTO(Route route) {
         RoutesDTO dto = new RoutesDTO();
-        dto.setIdRoute(route.getIdRoute());
+        dto.setIdRoute(route.getId());
         dto.setQrRoute(route.getQrRoute());
         dto.setName(route.getName());
         dto.setTypeRoute(route.getTypeRoute());

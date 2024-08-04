@@ -19,7 +19,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_route", nullable = false, length = 5)
-    private Long idRoute;
+    private Long id;
 
     @Column(name = "qr", nullable = false, length = 50)
     private String qrRoute;
