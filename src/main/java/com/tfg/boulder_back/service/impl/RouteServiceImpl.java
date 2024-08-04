@@ -88,6 +88,8 @@ public class RouteServiceImpl implements RouteService {
             throw new RouteNotFoundException("Route not found with ID: " + idRoute);
         }
 
+        DetailedBoulderDTO boulder = converToDetailedBoulderDTO(optionalBoulder.get());
+
         Route route = optionalRoute.get();
         List<Video> videos = videoRepository.findAllById(Collections.singleton(idRoute)); // TODO: revisar repository, aqui se busca por idRoute, en UserServiceImpl se busca por idUser.
 
@@ -98,6 +100,8 @@ public class RouteServiceImpl implements RouteService {
         detailedRouteDTO.setPresa(route.getPresa());
         detailedRouteDTO.setTypeRoute(route.getTypeRoute());
         detailedRouteDTO.setNum_nivel(route.getNum_nivel());
+
+        detailedRouteDTO.setBoulder(boulder);
 
         List<DetailedVideoDTO> detailedVideosDTO = videos.stream().map(this::convertToDetailedVideoDTO).toList();
         detailedRouteDTO.setVideos(detailedVideosDTO);
@@ -124,6 +128,17 @@ public class RouteServiceImpl implements RouteService {
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
+
+        return dto;
+    }
+
+    private DetailedBoulderDTO converToDetailedBoulderDTO(Boulder boulder){
+        DetailedBoulderDTO dto = new DetailedBoulderDTO();
+        dto.setName(boulder.getName());
+        dto.setAddress(boulder.getAddress());
+        dto.setLocality(boulder.getLocality());
+        dto.setMail(boulder.getMail());
+        dto.setPhone(boulder.getPhone());
 
         return dto;
     }
