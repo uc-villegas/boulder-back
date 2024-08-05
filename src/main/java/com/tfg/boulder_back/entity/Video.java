@@ -31,6 +31,9 @@ public class Video {
     @Column(name = "url", nullable = false, length = 100)
     private String url;
 
+    @Column(name = "duration", nullable = false)
+    private int duration;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -40,4 +43,5 @@ public class Video {
     @JoinColumn(name = "id_route", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Route route;
+
 }

@@ -21,5 +21,5 @@ public class DetailedRouteDTO {
     private String presa; // Colores
     private Date creationDate;
     private DetailedBoulderDTO boulder; // Para pintar los datos del boulder en DetallesVia
-    private List<DetailedVideoDTO> videos;
+    private List<VideoDTO> videos;
 }

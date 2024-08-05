@@ -4,6 +4,7 @@ import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.dto.*;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
+import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.exceptions.BoulderNotFoundException;
 import com.tfg.boulder_back.exceptions.RouteNotFoundException;
@@ -103,8 +104,8 @@ public class RouteServiceImpl implements RouteService {
 
         detailedRouteDTO.setBoulder(boulder);
 
-        List<DetailedVideoDTO> detailedVideosDTO = videos.stream().map(this::convertToDetailedVideoDTO).toList();
-        detailedRouteDTO.setVideos(detailedVideosDTO);
+        List<VideoDTO> videosDTO = videos.stream().map(this::convertToVideoDTO).toList();
+        detailedRouteDTO.setVideos(videosDTO);
 
         return detailedRouteDTO;
     }
@@ -122,12 +123,22 @@ public class RouteServiceImpl implements RouteService {
         return dto;
     }
 
-    private DetailedVideoDTO convertToDetailedVideoDTO(Video video) {
-        DetailedVideoDTO dto = new DetailedVideoDTO();
+    private VideoDTO convertToVideoDTO(Video video) {
+        VideoDTO dto = new VideoDTO();
         dto.setId(video.getId());
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
+        dto.setDuration(video.getDuration());
+        dto.setUser(convertToUserDTO(video.getUser()));
+
+        return dto;
+    }
+
+    private UserDTO convertToUserDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setIdUser(user.getIdUser());
+        dto.setName(user.getName());
 
         return dto;
     }

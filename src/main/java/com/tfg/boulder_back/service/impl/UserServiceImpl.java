@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
+        dto.setDuration(video.getDuration());
 
         return dto;
     }

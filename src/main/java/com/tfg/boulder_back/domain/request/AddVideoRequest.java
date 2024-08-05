@@ -18,6 +18,9 @@ public class AddVideoRequest {
     private String url;
 
     @NotNull
+    private int duration;
+
+    @NotNull
     private Long idRoute;
 
 }

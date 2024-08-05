@@ -51,6 +51,7 @@ public class VideoServiceImpl implements VideoService {
         videoToAdd.setDescription(videoRequest.getDescription());
         videoToAdd.setTitle(videoRequest.getTitle());
         videoToAdd.setUrl(videoRequest.getUrl());
+        videoToAdd.setDuration(videoRequest.getDuration());
 
         //routeRepository.save(route);
         //userRepository.save(user);
