@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class DetailedBoulderDTO {
 
+    private Long idBoulder;
     private String name;
     private String address;
     private String locality;

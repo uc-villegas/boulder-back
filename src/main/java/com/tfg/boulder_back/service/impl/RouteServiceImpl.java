@@ -150,6 +150,7 @@ public class RouteServiceImpl implements RouteService {
         dto.setLocality(boulder.getLocality());
         dto.setMail(boulder.getMail());
         dto.setPhone(boulder.getPhone());
+        dto.setIdBoulder(boulder.getIdBoulder());
 
         return dto;
     }
