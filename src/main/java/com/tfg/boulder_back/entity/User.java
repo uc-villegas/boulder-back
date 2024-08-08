@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -22,18 +23,16 @@ public class User {
     @Pattern(regexp = "\\d")
     private Long idUser;
 
-    @Column(name = "name", nullable = false, length = 10)
+    @Column(name = "name", nullable = false, length = 50)
     private String name; // TODO: pattern
 
-    @Column(name = "surname", nullable = true, length = 10)
+    @Column(name = "surname", nullable = true, length = 50)
     private String surname; // TODO: pattern
 
-    @Column(name = "mail", nullable = false, length = 20)
+    @Column(name = "mail", nullable = false, length = 50)
     private String email; // TODO: pattern
 
-    @Column(name = "password", nullable = false, length = 20)
+    @Column(name = "password", nullable = false, length = 50)
     private String password; // TODO: pattern
 
-//    @OneToMany(mappedBy = "author")
-//    private Set<Video> videos;
 }

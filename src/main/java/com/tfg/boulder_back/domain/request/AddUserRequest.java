@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class AddUserRequest {
 
+    // TODO: Hacerlo como con AddRouteRequest
+
     @NotEmpty
     private String idUser;
 
