@@ -36,4 +36,16 @@ public class VideoController {
         log.info("Getting all videos");
         return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}/videos/{idVideo}")
+    public ResponseEntity<Object> deleteVideo(@PathVariable Long idBoulder, @PathVariable Long idRoute, @PathVariable Long idVideo){
+        log.info("deleteRoute called");
+        try{
+            videoService.deleteVideo(idBoulder, idRoute, idVideo);
+            return ResponseEntity.noContent().build();
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
