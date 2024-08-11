@@ -2,6 +2,7 @@ package com.tfg.boulder_back.web;
 
 import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.dto.DetailedRouteDTO;
+import com.tfg.boulder_back.dto.RouteEditDTO;
 import com.tfg.boulder_back.dto.RoutesDTO;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.service.RouteService;
@@ -69,14 +70,14 @@ public class RouteController {
         }
     }
 
-//    @PutMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
-//    public ResponseEntity<Route> updateRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute, @RequestBody UpdateRouteRequest request) {
-//        log.info("updateRoute called");
-//        try {
-//            DetailedRouteDTO route = routeService.updateRoute()
-//            return new ResponseEntity<>(null, HttpStatus.OK);
-//        }catch (Exception e){
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @PutMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
+    public ResponseEntity<Route> updateRoute(@PathVariable Long idRoute, @RequestBody RouteEditDTO request) {
+        log.info("updateRoute called");
+        try {
+            Route route = routeService.updateRoute(idRoute, request);
+            return new ResponseEntity<>(route, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
