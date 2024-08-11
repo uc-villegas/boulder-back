@@ -56,4 +56,27 @@ public class RouteController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
+    public ResponseEntity<Object> deleteRoute (@PathVariable Long idBoulder, @PathVariable Long idRoute){
+        log.info("deleteRoute called");
+        try{
+            routeService.deleteRoute(idBoulder, idRoute);
+            return ResponseEntity.noContent().build();
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+//    @PutMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
+//    public ResponseEntity<Route> updateRoute(@PathVariable Long idBoulder, @PathVariable Long idRoute, @RequestBody UpdateRouteRequest request) {
+//        log.info("updateRoute called");
+//        try {
+//            DetailedRouteDTO route = routeService.updateRoute()
+//            return new ResponseEntity<>(null, HttpStatus.OK);
+//        }catch (Exception e){
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }

@@ -13,4 +13,7 @@ public interface RouteService {
     Route addRouteAndLoadData(AddRouteRequest addRouteRequest);
     DetailedRouteDTO findByIdRouteNameBoulder(String nameBoulder, Long idRoute);
 
+    //Route updateRoute(Long idBoulder, Long idRoute, UpdateRouteRequest request);
+    void deleteRoute(Long idBoulder, Long idRoute);
+
 }

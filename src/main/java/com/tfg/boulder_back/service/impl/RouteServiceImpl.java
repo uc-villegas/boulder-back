@@ -110,6 +110,40 @@ public class RouteServiceImpl implements RouteService {
         return detailedRouteDTO;
     }
 
+//    @Override
+//    public Route updateRoute(Long idBoulder, Long idRoute, UpdateRouteRequest request) {
+//        return null;
+//    }
+
+    @Override
+    public void deleteRoute(Long idBoulder, Long idRoute) {
+
+        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
+
+        if (optionalBoulder.isEmpty()) {
+            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
+        }
+
+        Boulder boulder = optionalBoulder.get();
+
+        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
+
+        if (optionalRoute.isEmpty()) {
+            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
+        }
+
+        Route route = optionalRoute.get();
+
+        if (!route.getBoulder().getIdBoulder().equals(idBoulder)) {
+            throw new IllegalArgumentException("Route does not belong to Boulder with ID: " + idBoulder);
+        }
+
+        boulder.getRoutes().remove(route);
+        routeRepository.delete(route);
+        boulderRepository.save(boulder);
+
+    }
+
 
     private RoutesDTO convertToRoutesDTO(Route route) {
         RoutesDTO dto = new RoutesDTO();
