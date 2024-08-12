@@ -9,5 +9,6 @@ public interface VideoService {
 
     List<Video> getAllVideos();
     Video addVideo(AddVideoRequest video, Long userId);
+    void deleteVideo(Long idBoulder, Long idRoute, Long idVideo);
 
 }

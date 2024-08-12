@@ -110,6 +110,51 @@ public class RouteServiceImpl implements RouteService {
         return detailedRouteDTO;
     }
 
+    @Override
+    public Route updateRoute(Long idRoute, RouteEditDTO request) {
+        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
+
+        if (optionalRoute.isEmpty()) {
+            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
+        }
+
+        Route route = optionalRoute.get();
+
+        editRoute(route, request);
+        routeRepository.save(route);
+
+        return route;
+    }
+
+    @Override
+    public void deleteRoute(Long idBoulder, Long idRoute) {
+
+        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
+
+        if (optionalBoulder.isEmpty()) {
+            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
+        }
+
+        Boulder boulder = optionalBoulder.get();
+
+        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
+
+        if (optionalRoute.isEmpty()) {
+            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
+        }
+
+        Route route = optionalRoute.get();
+
+        if (!route.getBoulder().getIdBoulder().equals(idBoulder)) {
+            throw new IllegalArgumentException("Route does not belong to Boulder with ID: " + idBoulder);
+        }
+
+        boulder.getRoutes().remove(route);
+        routeRepository.delete(route);
+        boulderRepository.save(boulder);
+
+    }
+
 
     private RoutesDTO convertToRoutesDTO(Route route) {
         RoutesDTO dto = new RoutesDTO();
@@ -153,5 +198,25 @@ public class RouteServiceImpl implements RouteService {
         dto.setIdBoulder(boulder.getIdBoulder());
 
         return dto;
+    }
+
+    private void editRoute(Route route, RouteEditDTO routeModified){
+
+        if (routeModified.getQrRoute() != null) {
+            route.setQrRoute(routeModified.getQrRoute());
+        }
+        if (routeModified.getName() != null) {
+            route.setName(routeModified.getName());
+        }
+        if (routeModified.getTypeRoute() != null) {
+            route.setTypeRoute(routeModified.getTypeRoute());
+        }
+        if (routeModified.getPresa() != null) {
+            route.setPresa(routeModified.getPresa());
+        }
+        if (routeModified.getNum_nivel() != null && !routeModified.getNum_nivel().equals(route.getNum_nivel())) {
+            route.setNum_nivel(routeModified.getNum_nivel());
+        }
+
     }
 }
