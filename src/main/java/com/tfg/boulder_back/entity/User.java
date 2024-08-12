@@ -1,5 +1,6 @@
 package com.tfg.boulder_back.entity;
 
+import com.tfg.boulder_back.constants.TypeUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -34,5 +35,8 @@ public class User {
 
     @Column(name = "password", nullable = false, length = 50)
     private String password; // TODO: pattern
+
+    @Column(name = "role", nullable = false)
+    private TypeUser role;
 
 }
