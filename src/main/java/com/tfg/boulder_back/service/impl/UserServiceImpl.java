@@ -1,10 +1,13 @@
 package com.tfg.boulder_back.service.impl;
 
 import com.tfg.boulder_back.constants.TypeUser;
+import com.tfg.boulder_back.domain.request.LoginRequest;
 import com.tfg.boulder_back.dto.DetailedUserDTO;
 import com.tfg.boulder_back.dto.DetailedVideoDTO;
+import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.AuthenticationException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.repository.UserRepository;
 import com.tfg.boulder_back.repository.VideoRepository;
@@ -58,6 +61,33 @@ public class UserServiceImpl implements UserService {
         detailedUserDTO.setVideos(detailedVideosDTO);
 
         return detailedUserDTO;
+    }
+
+    @Override
+    public UserHomeDTO authenticateUser(LoginRequest loginRequest) {
+        Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
+
+        if(userOptional.isEmpty()){
+            throw new UserNotFoundException("User not found");
+        }
+
+        User user = userOptional.get();
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
+            throw new AuthenticationException("Invalid credentials");
+        }
+
+        return convertToUserHomeDTO(user);
+    }
+
+    private UserHomeDTO convertToUserHomeDTO(User user){
+        UserHomeDTO userHomeDTO = new UserHomeDTO();
+        userHomeDTO.setIdUser(user.getIdUser());
+        userHomeDTO.setName(user.getName());
+        userHomeDTO.setSurname(user.getSurname());
+        userHomeDTO.setEmail(user.getEmail());
+        userHomeDTO.setRole(user.getRole());
+
+        return userHomeDTO;
     }
 
     private DetailedVideoDTO convertToDetailedVideoDTO(Video video) {

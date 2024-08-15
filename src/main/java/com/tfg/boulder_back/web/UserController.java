@@ -1,7 +1,10 @@
 package com.tfg.boulder_back.web;
 
+import com.tfg.boulder_back.domain.request.LoginRequest;
 import com.tfg.boulder_back.dto.DetailedUserDTO;
+import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
+import com.tfg.boulder_back.exceptions.AuthenticationException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.service.UserService;
 import org.slf4j.Logger;
@@ -39,6 +42,20 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/api/v1/auth/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+        try {
+            UserHomeDTO user = userService.authenticateUser(loginRequest);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
