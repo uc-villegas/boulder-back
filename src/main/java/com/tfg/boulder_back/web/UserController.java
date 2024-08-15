@@ -23,7 +23,7 @@ public class UserController {
     @PostMapping("/user/enrollment")
     public ResponseEntity<User> addUser(@RequestBody User newUser){
         try {
-            User createdUser = userService.addCUser(newUser);
+            User createdUser = userService.addUser(newUser);
             log.info("Received request to create a new customer");
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
         } catch(Exception e) {

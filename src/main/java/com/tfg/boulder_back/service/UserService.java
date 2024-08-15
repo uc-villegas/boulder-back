@@ -5,7 +5,7 @@ import com.tfg.boulder_back.entity.User;
 
 public interface UserService {
 
-    User addCUser(User user);
+    User addUser(User user);
     DetailedUserDTO getDetailedUserById(Long idUser);
 
 }

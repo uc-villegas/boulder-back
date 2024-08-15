@@ -36,6 +36,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 50)
     private String password; // TODO: pattern
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private TypeUser role;
 

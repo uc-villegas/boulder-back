@@ -1,5 +1,6 @@
 package com.tfg.boulder_back.service.impl;
 
+import com.tfg.boulder_back.constants.TypeUser;
 import com.tfg.boulder_back.dto.DetailedUserDTO;
 import com.tfg.boulder_back.dto.DetailedVideoDTO;
 import com.tfg.boulder_back.entity.User;
@@ -26,7 +27,12 @@ public class UserServiceImpl implements UserService {
     private VideoRepository videoRepository;
 
     @Override
-    public User addCUser(User user) {
+    public User addUser(User user) {
+
+        if (user.getRole() == null) {
+            user.setRole(TypeUser.USER);
+        }
+
         return userRepository.save(user);
     }
 
