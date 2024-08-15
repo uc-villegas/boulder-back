@@ -1,7 +1,11 @@
 package com.tfg.boulder_back.web;
 
+import com.tfg.boulder_back.domain.request.LoginRequest;
 import com.tfg.boulder_back.dto.DetailedUserDTO;
+import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
+import com.tfg.boulder_back.exceptions.AuthenticationException;
+import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.service.UserService;
 import org.slf4j.Logger;
@@ -23,9 +27,12 @@ public class UserController {
     @PostMapping("/user/enrollment")
     public ResponseEntity<User> addUser(@RequestBody User newUser){
         try {
-            User createdUser = userService.addCUser(newUser);
+            User createdUser = userService.addUser(newUser);
             log.info("Received request to create a new customer");
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } catch (EmailAlreadyExistsException e) {
+            log.error("Email already in use: " + newUser.getEmail(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         } catch(Exception e) {
             log.error("Error while adding new user", e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,6 +46,20 @@ public class UserController {
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+        try {
+            UserHomeDTO user = userService.authenticateUser(loginRequest);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        } catch (AuthenticationException e) {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("An error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
