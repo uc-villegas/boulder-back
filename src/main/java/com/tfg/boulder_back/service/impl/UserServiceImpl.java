@@ -8,6 +8,7 @@ import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.exceptions.AuthenticationException;
+import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.repository.UserRepository;
 import com.tfg.boulder_back.repository.VideoRepository;
@@ -31,6 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
+
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new EmailAlreadyExistsException("Email " + user.getEmail() + " is already in use.");
+        }
 
         if (user.getRole() == null) {
             user.setRole(TypeUser.USER);

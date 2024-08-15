@@ -30,7 +30,7 @@ public class User {
     @Column(name = "surname", nullable = true, length = 50)
     private String surname; // TODO: pattern
 
-    @Column(name = "mail", nullable = false, length = 50)
+    @Column(name = "mail", nullable = false, unique = true, length = 50)
     private String email; // TODO: pattern
 
     @Column(name = "password", nullable = false, length = 50)

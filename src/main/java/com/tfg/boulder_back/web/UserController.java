@@ -5,6 +5,7 @@ import com.tfg.boulder_back.dto.DetailedUserDTO;
 import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.exceptions.AuthenticationException;
+import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.service.UserService;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class UserController {
             User createdUser = userService.addUser(newUser);
             log.info("Received request to create a new customer");
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        } catch (EmailAlreadyExistsException e) {
+            log.error("Email already in use: " + newUser.getEmail(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         } catch(Exception e) {
             log.error("Error while adding new user", e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -45,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/api/v1/auth/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
         try {
             UserHomeDTO user = userService.authenticateUser(loginRequest);
