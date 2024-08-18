@@ -32,6 +32,8 @@ public class Boulder {
     @Column(name = "locality", nullable = false, length = 50)
     private String locality;
 
+    // TODO: FOTO
+
     @Column(name = "mail", nullable = false, length = 50)
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
     private String mail; // TODO: pattern
