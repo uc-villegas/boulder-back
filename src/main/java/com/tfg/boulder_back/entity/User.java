@@ -25,7 +25,7 @@ public class User {
     private Long idUser;
 
     @Column(name = "name", nullable = false, length = 50)
-    private String name; // TODO: pattern
+    private String name; // TODO: pattern Revisar campos ""
 
     @Column(name = "surname", nullable = true, length = 50)
     private String surname; // TODO: pattern
