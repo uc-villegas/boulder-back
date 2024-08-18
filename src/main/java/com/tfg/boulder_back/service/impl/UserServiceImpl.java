@@ -8,6 +8,7 @@ import com.tfg.boulder_back.dto.UserHomeDTO;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.exceptions.AuthenticationException;
+import com.tfg.boulder_back.exceptions.BoulderPropertyNotFoundException;
 import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
 import com.tfg.boulder_back.repository.UserRepository;
@@ -39,7 +40,12 @@ public class UserServiceImpl implements UserService {
 
         if (user.getRole() == null) {
             user.setRole(TypeUser.USER);
+        }else if (user.getRole() == TypeUser.WORKER) {
+            if(user.getBoulder() == null){
+                throw new BoulderPropertyNotFoundException("Boulder is null");
+            }
         }
+
 
         return userRepository.save(user);
     }
@@ -91,6 +97,7 @@ public class UserServiceImpl implements UserService {
         userHomeDTO.setSurname(user.getSurname());
         userHomeDTO.setEmail(user.getEmail());
         userHomeDTO.setRole(user.getRole());
+        userHomeDTO.setBoulder(user.getBoulder());
 
         return userHomeDTO;
     }

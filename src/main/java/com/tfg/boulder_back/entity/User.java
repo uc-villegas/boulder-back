@@ -40,4 +40,7 @@ public class User {
     @Column(name = "role", nullable = false)
     private TypeUser role;
 
+    @Column(name = "boulder", nullable = true)
+    private Long boulder;
+
 }
