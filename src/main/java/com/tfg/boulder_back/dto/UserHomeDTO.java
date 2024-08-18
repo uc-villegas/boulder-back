@@ -15,5 +15,5 @@ public class UserHomeDTO {
     private String surname;
     private String email;
     private TypeUser role;
-    private Long boulder;
+    private DetailedBoulderDTO boulder;
 }
