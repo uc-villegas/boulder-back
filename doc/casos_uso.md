@@ -54,6 +54,7 @@ El cliente tendrá todos los casos de uso del invitado, menos obviamente los de 
 - Edita vía
 - Da de baja vía
 - Da de baja vídeo
+- Cerrar sesión
 
 ## Casos de uso extra
 

@@ -1,6 +1,5 @@
 package com.tfg.boulder_back.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -33,6 +32,8 @@ public class Video {
 
     @Column(name = "duration", nullable = false)
     private int duration;
+
+    // TODO: Fecha de publicacion en la app. Para poder ordenar por mas recientes. Quiero mostrarlo en cada video de la lista, en detalles via.
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)
