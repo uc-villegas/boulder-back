@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "Video", schema = "boulder")
 @Data
@@ -27,13 +29,15 @@ public class Video {
     @Column(name = "description", nullable = true, length = 500)
     private String description;
 
-    @Column(name = "url", nullable = false, length = 100)
+    @Column(name = "url", nullable = false, unique = true, length = 100)
     private String url;
 
     @Column(name = "duration", nullable = false)
     private int duration;
 
-    // TODO: Fecha de publicacion en la app. Para poder ordenar por mas recientes. Quiero mostrarlo en cada video de la lista, en detalles via.
+    @Column(name = "publication_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_user", nullable = false)

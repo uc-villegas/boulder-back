@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class AddVideoRequest {
@@ -20,7 +22,6 @@ public class AddVideoRequest {
     @NotNull
     private int duration;
 
-    @NotNull
-    private Long idRoute;
+    private Date publicationDate;
 
 }
