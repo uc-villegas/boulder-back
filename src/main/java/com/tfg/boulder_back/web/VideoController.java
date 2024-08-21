@@ -21,11 +21,11 @@ public class VideoController {
     @Autowired
     private VideoService videoService;
 
-    @PostMapping(value = "/boulder/via/video/add")
-    public ResponseEntity<Video> addVideo(@RequestBody AddVideoRequest video, @RequestParam Long userId) {
+    @PostMapping(value = "/user/{userId}/boulder/{boulderName}/via/{routeName}/video/add")
+    public ResponseEntity<Video> addVideo(@RequestBody AddVideoRequest video, @PathVariable Long userId, @PathVariable String boulderName, @PathVariable String routeName) {
         log.info("Adding video: {}", video.getUrl());
         try{
-            return new ResponseEntity<>(videoService.addVideo(video, userId), HttpStatus.CREATED);
+            return new ResponseEntity<>(videoService.addVideo(video, userId, boulderName, routeName), HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -36,6 +36,8 @@ public class VideoController {
         log.info("Getting all videos");
         return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);
     }
+
+    // TODO: getAllVideos(Long idUser) Para la funcionalidad: Mis Videos
 
     @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}/videos/{idVideo}")
     public ResponseEntity<Object> deleteVideo(@PathVariable Long idBoulder, @PathVariable Long idRoute, @PathVariable Long idVideo){
