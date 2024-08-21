@@ -2,14 +2,18 @@ package com.tfg.boulder_back.service.impl;
 
 import com.tfg.boulder_back.constants.TypeUser;
 import com.tfg.boulder_back.domain.request.LoginRequest;
+import com.tfg.boulder_back.dto.DetailedBoulderDTO;
 import com.tfg.boulder_back.dto.DetailedUserDTO;
 import com.tfg.boulder_back.dto.DetailedVideoDTO;
 import com.tfg.boulder_back.dto.UserHomeDTO;
+import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.exceptions.AuthenticationException;
+import com.tfg.boulder_back.exceptions.BoulderPropertyNotFoundException;
 import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.UserNotFoundException;
+import com.tfg.boulder_back.repository.BoulderRepository;
 import com.tfg.boulder_back.repository.UserRepository;
 import com.tfg.boulder_back.repository.VideoRepository;
 import com.tfg.boulder_back.service.UserService;
@@ -29,6 +33,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private VideoRepository videoRepository;
+    @Autowired
+    private BoulderRepository boulderRepository;
 
     @Override
     public User addUser(User user) {
@@ -39,7 +45,12 @@ public class UserServiceImpl implements UserService {
 
         if (user.getRole() == null) {
             user.setRole(TypeUser.USER);
+        }else if (user.getRole() == TypeUser.WORKER) {
+            if(user.getBoulder() == null){
+                throw new BoulderPropertyNotFoundException("Boulder is null");
+            }
         }
+
 
         return userRepository.save(user);
     }
@@ -85,12 +96,34 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserHomeDTO convertToUserHomeDTO(User user){
+
+
         UserHomeDTO userHomeDTO = new UserHomeDTO();
         userHomeDTO.setIdUser(user.getIdUser());
         userHomeDTO.setName(user.getName());
         userHomeDTO.setSurname(user.getSurname());
         userHomeDTO.setEmail(user.getEmail());
         userHomeDTO.setRole(user.getRole());
+
+        if(user.getRole() == TypeUser.WORKER){
+
+            Optional<Boulder> boulderOptional = boulderRepository.findById(user.getBoulder());
+
+            if(boulderOptional.isPresent()){
+                Boulder boulder = boulderOptional.get();
+
+                DetailedBoulderDTO detailedBoulderDTO = new DetailedBoulderDTO();
+                detailedBoulderDTO.setIdBoulder(boulder.getIdBoulder());
+                detailedBoulderDTO.setName(boulder.getName());
+                detailedBoulderDTO.setLocality(boulder.getLocality());
+                detailedBoulderDTO.setAddress(boulder.getAddress());
+                detailedBoulderDTO.setMail(boulder.getMail());
+                detailedBoulderDTO.setPhone(boulder.getPhone());
+
+                userHomeDTO.setBoulder(detailedBoulderDTO);
+            }
+
+        }
 
         return userHomeDTO;
     }
