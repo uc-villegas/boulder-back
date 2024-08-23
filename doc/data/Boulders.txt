@@ -15,7 +15,7 @@
         "locality": "Santander",
         "mail": "Agarrapresas@gmail.com",
         "phone": "942 123 222",
-        "phone2": "667 223 366
+        "phone2": "667 223 366"
     },
     {
         "idBoulder": 3,
