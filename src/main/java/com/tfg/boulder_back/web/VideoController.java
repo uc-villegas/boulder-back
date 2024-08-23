@@ -37,7 +37,11 @@ public class VideoController {
         return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);
     }
 
-    // TODO: getAllVideos(Long idUser) Para la funcionalidad: Mis Videos
+    @GetMapping(value = "/user/{idUser}/videos")
+    public ResponseEntity<List<Video>> getAllVideosByUser(@PathVariable Long idUser) {
+        log.info("Getting all videos");
+        return new ResponseEntity<>(videoService.getVideosByUserId(idUser), HttpStatus.OK);
+    }
 
     @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}/videos/{idVideo}")
     public ResponseEntity<Object> deleteVideo(@PathVariable Long idBoulder, @PathVariable Long idRoute, @PathVariable Long idVideo){
