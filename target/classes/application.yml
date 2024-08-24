@@ -10,12 +10,10 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 0
       idle-timeout: 600000
-      schema: boulder
       connection-timeout: 50000
   jpa:
     properties:
       hibernate:
-        default_schema: boulder
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
