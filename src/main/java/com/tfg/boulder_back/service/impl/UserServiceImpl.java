@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
         User user = userOptional.get();
         List<Video> videos = videoRepository.findAllById(Collections.singleton(id)); //TODO idUser o idRoute?
 
-        detailedUserDTO.setIdUser(user.getIdUser());
+        detailedUserDTO.setIdUser(user.getId());
         detailedUserDTO.setName(user.getName());
         detailedUserDTO.setSurname(user.getSurname());
         detailedUserDTO.setEmail(user.getEmail());
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
 
         UserHomeDTO userHomeDTO = new UserHomeDTO();
-        userHomeDTO.setIdUser(user.getIdUser());
+        userHomeDTO.setIdUser(user.getId());
         userHomeDTO.setName(user.getName());
         userHomeDTO.setSurname(user.getSurname());
         userHomeDTO.setEmail(user.getEmail());

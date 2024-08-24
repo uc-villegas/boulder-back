@@ -182,7 +182,7 @@ public class RouteServiceImpl implements RouteService {
 
     private UserDTO convertToUserDTO(User user) {
         UserDTO dto = new UserDTO();
-        dto.setIdUser(user.getIdUser());
+        dto.setIdUser(user.getId());
         dto.setName(user.getName());
 
         return dto;

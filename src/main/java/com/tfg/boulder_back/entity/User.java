@@ -7,9 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 
 @Entity
 @Table(name = "app_user")
@@ -22,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", nullable = false, length = 5)
     @Pattern(regexp = "\\d")
-    private Long idUser;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name; // TODO: pattern Revisar campos ""

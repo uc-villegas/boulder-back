@@ -12,6 +12,6 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 
     List<Video> findByRouteId(Long routeId);
 
-    @Query("SELECT v FROM Video v WHERE v.user.idUser = :userId ")
+    @Query("SELECT v FROM Video v WHERE v.user.id = :userId ")
     List<Video> findByUserId(Long userId);
 }
