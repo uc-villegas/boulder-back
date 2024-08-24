@@ -1,0 +1,83 @@
+[
+    {
+        "idBoulder": 1,
+        "name": "Treparriscos",
+        "address": "C/Santa Lucia, 22",
+        "locality": "Muriedas",
+        "mail": "Treparriscos@gmail.com",
+        "phone": "942 222 222",
+        "phone2": null
+    },
+    {
+        "idBoulder": 2,
+        "name": "Agarrapresas",
+        "address": "C/San Fernando, S/N",
+        "locality": "Santander",
+        "mail": "Agarrapresas@gmail.com",
+        "phone": "942 123 222",
+        "phone2": "667 223 366"
+    },
+    {
+        "idBoulder": 3,
+        "name": "Rompemuros",
+        "address": "C/General Davil, 14",
+        "locality": "Cazoña",
+        "mail": "Rompemuros@gmail.com",
+        "phone": "942 567 123",
+        "phone2": null
+    },
+    {
+        "idBoulder": 4,
+        "name": "Trepamuros",
+        "address": "C/Vallicergo, 20",
+        "locality": "Santander",
+        "mail": "Trepamuros@gmail.com",
+        "phone": "942 333 456",
+        "phone2": "634 188 344"
+    },
+    {
+        "idBoulder": 5,
+        "name": "Subeparedes",
+        "address": "C/Rio de la Pila, 2",
+        "locality": "Santander",
+        "mail": "Subeparedes@gmail.com",
+        "phone": "942 678 321",
+        "phone2": null
+    },
+    {
+        "idBoulder": 6,
+        "name": "Calientabrazos",
+        "address": "C/Paseo de Pereda, 22",
+        "locality": "Santander",
+        "mail": "Calientabrazos@gmail.com",
+        "phone": "942 875 189",
+        "phone2": null
+    },
+    {
+        "idBoulder": 7,
+        "name": "Duermeantebrazos",
+        "address": "C/Ayuntamiento, 78",
+        "locality": "Maliaño",
+        "mail": "Duermeantebrazos@gmail.com",
+        "phone": "942 666 444",
+        "phone2": null
+    },
+    {
+        "idBoulder": 8,
+        "name": "Sololocos",
+        "address": "C/Cantabria, 23",
+        "locality": "El Sardinero",
+        "mail": "Sololocos@gmail.com",
+        "phone": "942 156 621",
+        "phone2": null
+    },
+    {
+        "idBoulder": 9,
+        "name": "Telefonos",
+        "address": "C/Fonoteles, 33",
+        "locality": "Solares",
+        "mail": "Telefonos@gmail.com",
+        "phone": "942 123 987",
+        "phone2": "611 223 344"
+    }
+]
