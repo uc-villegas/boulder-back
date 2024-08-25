@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Date;
 
 @Entity
-@Table(name = "Video", schema = "boulder")
+@Table(name = "Video")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

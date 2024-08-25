@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Boulder", schema = "boulder")
+@Table(name = "Boulder")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class Boulder {
     @Column(name = "id_boulder", nullable = false, length = 5)
     private Long idBoulder;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name; // TODO: pattern
 
     @Column(name = "address", nullable = true, length = 50)

@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Date;
 
 @Entity
-@Table(name = "Route", schema = "boulder")
+@Table(name = "Route")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,7 @@ public class Route {
     @Column(name = "qr", nullable = false, length = 50)
     private String qrRoute;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name; // TODO: pattern
 
     @Enumerated(EnumType.STRING)

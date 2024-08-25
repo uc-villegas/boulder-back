@@ -3,8 +3,11 @@ spring:
     name: BoulderBackApplication
   datasource:
     driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5432/BoulderDB?currentSchema=boulder
     url: jdbc:postgresql://dpg-cr4s9ro8fa8c73a721kg-a:5432/climbappdb
+    #username: pablo
     username: climbappdb_user
+    #password: pabloAdm
     password: N2DGUmuRyaV5WX98T4JMAcc9bL33on3l
     hikari:
       maximum-pool-size: 10
@@ -14,6 +17,7 @@ spring:
   jpa:
     properties:
       hibernate:
+        #default_schema: boulder #Local
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
