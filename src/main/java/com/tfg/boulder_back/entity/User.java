@@ -28,7 +28,7 @@ public class User {
     private String surname; // TODO: pattern
 
     @Column(name = "mail", nullable = false, unique = true, length = 50)
-    private String email; // TODO: pattern
+    private String email; // TODO: patternnn
 
     @Column(name = "password", nullable = false, length = 50)
     private String password; // TODO: pattern
