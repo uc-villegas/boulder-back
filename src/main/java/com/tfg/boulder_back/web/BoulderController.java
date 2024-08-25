@@ -1,6 +1,7 @@
 package com.tfg.boulder_back.web;
 
 
+import com.tfg.boulder_back.dto.BouldersInfo;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.service.BoulderService;
 import org.slf4j.Logger;
@@ -29,6 +30,18 @@ public class BoulderController {
         try{
             log.info("getAllBoulders returned");
             return new ResponseEntity<>(boulderService.findAllBoulders(), HttpStatus.OK);
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/boulders/routes")
+    public ResponseEntity<List<BouldersInfo>> getAllBouldersAndRoutes(){
+        log.info("getAllBouldersAndRoutes");
+        try{
+            log.info("getAllBouldersAndRoutes returned");
+            return new ResponseEntity<>(boulderService.findAllBouldersAndRoutes(), HttpStatus.OK);
         }catch (Exception e){
             log.error(e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
