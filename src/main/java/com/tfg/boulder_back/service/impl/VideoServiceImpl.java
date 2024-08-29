@@ -75,19 +75,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void deleteVideo(Long idBoulder, Long idRoute, Long idVideo) {
-
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
-
-        if (optionalBoulder.isEmpty()) {
-            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
-        }
-
-        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
-
-        if (optionalRoute.isEmpty()) {
-            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
-        }
+    public void deleteVideo(Long idVideo) {
 
         Optional<Video> optionalVideo = videoRepository.findById(idVideo);
 
@@ -95,15 +83,7 @@ public class VideoServiceImpl implements VideoService {
             throw new VideoNotFoundException("Video not found with ID: " + idVideo);
         }
 
-        Boulder boulder = optionalBoulder.get();
-        Route route = optionalRoute.get();
-        Video video = optionalVideo.get();
-
-        if (!route.getBoulder().getIdBoulder().equals(idBoulder)) {
-            throw new IllegalArgumentException("Route does not belong to Boulder with ID: " + idBoulder);
-        }
-
-        videoRepository.delete(video);
+        videoRepository.delete(optionalVideo.get());
     }
 
     @Override
