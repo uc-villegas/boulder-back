@@ -9,7 +9,7 @@ public interface VideoService {
 
     List<Video> getAllVideos();
     Video addVideo(AddVideoRequest video, Long userId, String boulderName, String routeName);
-    void deleteVideo(Long idBoulder, Long idRoute, Long idVideo);
+    void deleteVideo(Long idVideo);
     List<Video> getVideosByUserId(Long idUser);
 
 }

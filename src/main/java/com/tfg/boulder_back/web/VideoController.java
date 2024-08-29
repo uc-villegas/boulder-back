@@ -43,11 +43,11 @@ public class VideoController {
         return new ResponseEntity<>(videoService.getVideosByUserId(idUser), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}/videos/{idVideo}")
-    public ResponseEntity<Object> deleteVideo(@PathVariable Long idBoulder, @PathVariable Long idRoute, @PathVariable Long idVideo){
+    @DeleteMapping(value = "/videos/{idVideo}")
+    public ResponseEntity<Object> deleteVideo(@PathVariable Long idVideo){
         log.info("deleteRoute called");
         try{
-            videoService.deleteVideo(idBoulder, idRoute, idVideo);
+            videoService.deleteVideo(idVideo);
             return ResponseEntity.noContent().build();
         }catch (Exception e){
             log.error(e.getMessage());
