@@ -1,7 +1,12 @@
 package com.tfg.boulder_back.web;
 
 
+import com.tfg.boulder_back.domain.request.UpdateBoulderRequest;
+import com.tfg.boulder_back.domain.request.UpdateVideoRequest;
 import com.tfg.boulder_back.entity.Boulder;
+import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.BoulderNotFoundException;
+import com.tfg.boulder_back.exceptions.VideoNotFoundException;
 import com.tfg.boulder_back.service.BoulderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +49,20 @@ public class BoulderController {
             return new ResponseEntity<>(createdBoulder, HttpStatus.CREATED);
         } catch(Exception e) {
             log.error("Error while adding new boulder", e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(value = "/boulder/{idBoulder}")
+    public ResponseEntity<Boulder> editBoulder(@PathVariable Long idBoulder, @RequestBody UpdateBoulderRequest updateBoulderRequest) {
+        log.info("editBoulder called");
+        try {
+            Boulder updatedBoulder = boulderService.editBoulder(idBoulder, updateBoulderRequest);
+            return new ResponseEntity<>(updatedBoulder, HttpStatus.OK);
+        } catch (BoulderNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
