@@ -4,7 +4,9 @@ import com.tfg.boulder_back.domain.request.AddRouteRequest;
 import com.tfg.boulder_back.dto.DetailedRouteDTO;
 import com.tfg.boulder_back.dto.RouteEditDTO;
 import com.tfg.boulder_back.dto.RoutesDTO;
+import com.tfg.boulder_back.dto.VideoDTO;
 import com.tfg.boulder_back.entity.Route;
+import com.tfg.boulder_back.entity.Video;
 import com.tfg.boulder_back.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,11 +60,11 @@ public class RouteController {
         }
     }
 
-    @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
-    public ResponseEntity<Object> deleteRoute (@PathVariable Long idBoulder, @PathVariable Long idRoute){
+    @DeleteMapping(value = "/route/{idRoute}")
+    public ResponseEntity<Object> deleteRoute (@PathVariable Long idRoute){
         log.info("deleteRoute called");
         try{
-            routeService.deleteRoute(idBoulder, idRoute);
+            routeService.deleteRoute(idRoute);
             return ResponseEntity.noContent().build();
         }catch (Exception e){
             log.error(e.getMessage());
@@ -70,13 +72,25 @@ public class RouteController {
         }
     }
 
-    @PutMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
+    @PutMapping(value = "/route/{idRoute}")
     public ResponseEntity<Route> updateRoute(@PathVariable Long idRoute, @RequestBody RouteEditDTO request) {
         log.info("updateRoute called");
         try {
             Route route = routeService.updateRoute(idRoute, request);
             return new ResponseEntity<>(route, HttpStatus.OK);
         }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/route/{idRoute}/videos")
+    public ResponseEntity<Boolean> hasVideos(@PathVariable Long idRoute) {
+        log.info("hasVideos called for route ID: " + idRoute);
+        try {
+            boolean hasVideos = routeService.hasVideos(idRoute);
+            return new ResponseEntity<>(hasVideos, HttpStatus.OK);
+        } catch (Exception e) {
+            log.error("Error checking videos for route ID: " + idRoute, e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

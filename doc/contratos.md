@@ -201,6 +201,18 @@
 
 - Put Via: Editar una via del rocodromo donde trabaja.
 
+    - Se podrán editar los siguientes campos: 
+        - Nombre
+        - QR
+        - Tipo de ruta (BOULDER - WALL_ROUTE)
+        - Presa (Color)
+        - Nivel (1-10)
+    - PUT http://localhost:8080/api/v1/boulder/{idBoulder}/route/{idRoute}
+    - JSON Request {
+      "presa": "MORADO"
+      }
+    - ** Se puede modificar cualquiera de los campos mencionados.
+
 
 - Delete Via: Deshabilitar una via del rocodromo donde trabaja.
 

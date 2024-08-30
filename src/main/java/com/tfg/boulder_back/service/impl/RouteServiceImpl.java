@@ -127,15 +127,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void deleteRoute(Long idBoulder, Long idRoute) {
-
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
-
-        if (optionalBoulder.isEmpty()) {
-            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
-        }
-
-        Boulder boulder = optionalBoulder.get();
+    public void deleteRoute(Long idRoute) {
 
         Optional<Route> optionalRoute = routeRepository.findById(idRoute);
 
@@ -144,15 +136,18 @@ public class RouteServiceImpl implements RouteService {
         }
 
         Route route = optionalRoute.get();
-
-        if (!route.getBoulder().getIdBoulder().equals(idBoulder)) {
-            throw new IllegalArgumentException("Route does not belong to Boulder with ID: " + idBoulder);
-        }
+        Boulder boulder = route.getBoulder();
 
         boulder.getRoutes().remove(route);
         routeRepository.delete(route);
         boulderRepository.save(boulder);
 
+    }
+
+    @Override
+    public boolean hasVideos(Long idRoute) {
+        List<Video> videos = videoRepository.findByRouteId(idRoute);
+        return !videos.isEmpty();
     }
 
 

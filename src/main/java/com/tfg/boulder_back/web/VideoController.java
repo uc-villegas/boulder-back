@@ -1,7 +1,9 @@
 package com.tfg.boulder_back.web;
 
 import com.tfg.boulder_back.domain.request.AddVideoRequest;
+import com.tfg.boulder_back.domain.request.UpdateVideoRequest;
 import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.VideoNotFoundException;
 import com.tfg.boulder_back.service.VideoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,15 +46,29 @@ public class VideoController {
         return new ResponseEntity<>(videoService.getVideosByUserId(idUser), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/boulder/{idBoulder}/route/{idRoute}/videos/{idVideo}")
-    public ResponseEntity<Object> deleteVideo(@PathVariable Long idBoulder, @PathVariable Long idRoute, @PathVariable Long idVideo){
+    @DeleteMapping(value = "/videos/{idVideo}")
+    public ResponseEntity<Object> deleteVideo(@PathVariable Long idVideo){
         log.info("deleteRoute called");
         try{
-            videoService.deleteVideo(idBoulder, idRoute, idVideo);
+            videoService.deleteVideo(idVideo);
             return ResponseEntity.noContent().build();
         }catch (Exception e){
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping(value = "/videos/{idVideo}")
+    public ResponseEntity<Video> editVideo(@PathVariable Long idVideo, @RequestBody UpdateVideoRequest updateVideoRequest) {
+        log.info("editVideo called");
+        try {
+            Video updatedVideo = videoService.editVideo(idVideo, updateVideoRequest);
+            return new ResponseEntity<>(updatedVideo, HttpStatus.OK);
+        } catch (VideoNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

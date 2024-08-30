@@ -1,6 +1,7 @@
 package com.tfg.boulder_back.service.impl;
 
 import com.tfg.boulder_back.domain.request.AddVideoRequest;
+import com.tfg.boulder_back.domain.request.UpdateVideoRequest;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.User;
@@ -75,19 +76,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void deleteVideo(Long idBoulder, Long idRoute, Long idVideo) {
-
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(idBoulder);
-
-        if (optionalBoulder.isEmpty()) {
-            throw new BoulderNotFoundException("Boulder not found with ID: " + idBoulder);
-        }
-
-        Optional<Route> optionalRoute = routeRepository.findById(idRoute);
-
-        if (optionalRoute.isEmpty()) {
-            throw new RouteNotFoundException("Route not found with ID: " + idRoute);
-        }
+    public void deleteVideo(Long idVideo) {
 
         Optional<Video> optionalVideo = videoRepository.findById(idVideo);
 
@@ -95,20 +84,26 @@ public class VideoServiceImpl implements VideoService {
             throw new VideoNotFoundException("Video not found with ID: " + idVideo);
         }
 
-        Boulder boulder = optionalBoulder.get();
-        Route route = optionalRoute.get();
-        Video video = optionalVideo.get();
-
-        if (!route.getBoulder().getIdBoulder().equals(idBoulder)) {
-            throw new IllegalArgumentException("Route does not belong to Boulder with ID: " + idBoulder);
-        }
-
-        videoRepository.delete(video);
+        videoRepository.delete(optionalVideo.get());
     }
 
     @Override
     public List<Video> getVideosByUserId(Long idUser) {
         return videoRepository.findByUserId(idUser);
+    }
+
+    @Override
+    public Video editVideo(Long idVideo, UpdateVideoRequest updateVideoRequest) {
+        Optional<Video> optionalVideo = videoRepository.findById(idVideo);
+        if (optionalVideo.isPresent()) {
+            Video video = optionalVideo.get();
+            video.setTitle(updateVideoRequest.getTitle());
+            video.setDescription(updateVideoRequest.getDescription());
+            video.setDuration(updateVideoRequest.getDuration());
+            return videoRepository.save(video);
+        } else {
+            throw new VideoNotFoundException("Video not found with id " + idVideo);
+        }
     }
 
     @Override
