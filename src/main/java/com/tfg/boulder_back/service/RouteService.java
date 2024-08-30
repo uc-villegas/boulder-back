@@ -15,6 +15,8 @@ public interface RouteService {
     DetailedRouteDTO findByIdRouteNameBoulder(String nameBoulder, Long idRoute);
 
     Route updateRoute(Long idRoute, RouteEditDTO request);
-    void deleteRoute(Long idBoulder, Long idRoute);
+    void deleteRoute(Long idRoute);
+
+    boolean hasVideos(Long idRoute);
 
 }
