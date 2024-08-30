@@ -7,6 +7,8 @@ C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\bou
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\request\AddUserRequest.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\request\AddVideoRequest.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\request\LoginRequest.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\request\UpdateBoulderRequest.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\request\UpdateVideoRequest.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\response\BoulderDetails.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\response\RouteDetails.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\domain\response\UserDetails.java

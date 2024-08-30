@@ -1,4 +1,5 @@
 com\tfg\boulder_back\web\VideoController.class
+com\tfg\boulder_back\domain\request\UpdateVideoRequest.class
 com\tfg\boulder_back\exceptions\RouteNotFoundException.class
 com\tfg\boulder_back\repository\VideoRepository.class
 com\tfg\boulder_back\dto\DetailedBoulderDTO.class
@@ -26,6 +27,7 @@ com\tfg\boulder_back\repository\RouteRepository.class
 com\tfg\boulder_back\constants\TypeUser.class
 com\tfg\boulder_back\domain\request\AddBoulderRequest.class
 com\tfg\boulder_back\domain\request\LoginRequest.class
+com\tfg\boulder_back\domain\request\UpdateBoulderRequest.class
 com\tfg\boulder_back\domain\response\VideoDetails.class
 com\tfg\boulder_back\service\impl\UserServiceImpl.class
 com\tfg\boulder_back\entity\Boulder.class
