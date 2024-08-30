@@ -70,7 +70,7 @@ public class RouteController {
         }
     }
 
-    @PutMapping(value = "/boulder/{idBoulder}/route/{idRoute}")
+    @PutMapping(value = "/route/{idRoute}")
     public ResponseEntity<Route> updateRoute(@PathVariable Long idRoute, @RequestBody RouteEditDTO request) {
         log.info("updateRoute called");
         try {
