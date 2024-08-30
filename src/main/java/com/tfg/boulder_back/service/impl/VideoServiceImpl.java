@@ -1,6 +1,7 @@
 package com.tfg.boulder_back.service.impl;
 
 import com.tfg.boulder_back.domain.request.AddVideoRequest;
+import com.tfg.boulder_back.domain.request.UpdateVideoRequest;
 import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.User;
@@ -89,6 +90,20 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<Video> getVideosByUserId(Long idUser) {
         return videoRepository.findByUserId(idUser);
+    }
+
+    @Override
+    public Video editVideo(Long idVideo, UpdateVideoRequest updateVideoRequest) {
+        Optional<Video> optionalVideo = videoRepository.findById(idVideo);
+        if (optionalVideo.isPresent()) {
+            Video video = optionalVideo.get();
+            video.setTitle(updateVideoRequest.getTitle());
+            video.setDescription(updateVideoRequest.getDescription());
+            video.setDuration(updateVideoRequest.getDuration());
+            return videoRepository.save(video);
+        } else {
+            throw new VideoNotFoundException("Video not found with id " + idVideo);
+        }
     }
 
     @Override
