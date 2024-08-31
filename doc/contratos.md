@@ -10,7 +10,6 @@
       "surname": "Villegas",
       "email": "pablovillef@gmail.com",
       "password": "pass",
-      #### OPCIONAL "role": "WORKER" (DEFAULT role = USER)
       }
 
     - JSON Response
@@ -114,8 +113,8 @@
       }
 
 
-- Post Video: Un usuario podrá subir un video de una via, mediante un botón.
-    - POST http://localhost:8080/api/v1/boulder/via/video/add?userId=1
+- Post Video: Un usuario podrá subir un video a la lista de videos de una vía.
+    - POST http://localhost:8080/api/v1/user/{userId}/boulder/{boulderName}/via/{routeName}/video/add
 
     - JSON Request
      {
@@ -157,6 +156,28 @@
       }
       }
       }
+- Editar Video:
+  - PUT http://localhost:8080/api/v1/videos/{idVideo}
+  - JSON Request
+    {
+    "title": "MiVideo_1_Titulo",
+    "description": "Escalando via 1",
+    "duration": 2,
+    }
+  
+  - JSON Response
+    {
+    "idVideo": 2,
+    "title": "MiVideo_1_Titulo",
+    "description": "Escalando via 1",
+    "duration": 2,
+    "url": "xyz.youtube.com",
+    "publicationDate": "24-08-2024"
+    "user": 1,
+    "route": 3
+    }
+- Borrar Video:
+  - PUT http://localhost:8080/api/v1/videos/{idVideo} 
 
 ## Vista Trabajador
 
@@ -207,7 +228,7 @@
         - Tipo de ruta (BOULDER - WALL_ROUTE)
         - Presa (Color)
         - Nivel (1-10)
-    - PUT http://localhost:8080/api/v1/boulder/{idBoulder}/route/{idRoute}
+    - PUT http://localhost:8080/api/v1/route/{idRoute}
     - JSON Request {
       "presa": "MORADO"
       }
@@ -215,9 +236,11 @@
 
 
 - Delete Via: Deshabilitar una via del rocodromo donde trabaja.
+    - DELETE http://localhost:8080/api/v1/route/{idRoute}
 
 
 - Delete Video: Borrar un video de una via del rocodromo donde trabaja.
+    - DELETE http://localhost:8080/api/v1/videos/{idVideo}
 
 ## Admin
 
@@ -243,4 +266,27 @@
       "mail": "RascaMuros@gmail.com",
       "phone": "942 222 222",
       "phone2": null
+      }
+
+- Post Usuario: Admin puede crear trabajadores de un rocódromo.
+    - POST http://localhost:8080/api/v1/user/enrollment
+    - JSON Request
+      {
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "password": "pass",
+      "role": "WORKER",
+      "boulder": 3
+      }
+
+    - JSON Response
+      {
+      "idUser": 1,
+      "name": "Pablo",
+      "surname": "Villegas",
+      "email": "pablovillef@gmail.com",
+      "password": "pass",
+      "role": "WORKER",
+      "boulder": 3
       }

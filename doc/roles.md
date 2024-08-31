@@ -1,7 +1,7 @@
 # Gestion de roles
 
 En la aplicación, cuando un usuario inicia sesión, el backend devolverá el rol del usuario junto con el resto de la información del usuario.
-Esta información se usará para gestionar qué opciones de la interfaz de usuario se mostrarán.
+Esta información se usará para filtrar los elementos de la interfaz accesibles a cada tipo de usuario.
 
 
 ## User
@@ -11,8 +11,8 @@ Un usuario normal no puede modificar su rol.
 
 ## Worker
 
-Creado por un admin. Asociado a un rocodromo. Permite editar y borrar sus vías y videos.
+Creado por un admin. Gestiona los videos y vías de un solo rocódromo, permitiendo editar y borrar sus vías y videos.
 
 ## Admin
 
-Permite crear usuarios de tipo Worker.
+Gestiona la aplicación. Permite crear rocódromos y usuarios de tipo Worker.
