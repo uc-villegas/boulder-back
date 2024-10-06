@@ -169,7 +169,6 @@ public class RouteServiceImpl implements RouteService {
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
-        dto.setDuration(video.getDuration());
         dto.setUser(convertToUserDTO(video.getUser()));
 
         return dto;

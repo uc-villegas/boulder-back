@@ -64,7 +64,6 @@ public class VideoServiceImpl implements VideoService {
             videoToAdd.setDescription(videoRequest.getDescription());
             videoToAdd.setTitle(videoRequest.getTitle());
             videoToAdd.setUrl(videoRequest.getUrl());
-            videoToAdd.setDuration(videoRequest.getDuration());
             videoToAdd.setPublicationDate(new Date());
 
             videoRepository.save(videoToAdd);
@@ -99,7 +98,6 @@ public class VideoServiceImpl implements VideoService {
             Video video = optionalVideo.get();
             video.setTitle(updateVideoRequest.getTitle());
             video.setDescription(updateVideoRequest.getDescription());
-            video.setDuration(updateVideoRequest.getDuration());
             return videoRepository.save(video);
         } else {
             throw new VideoNotFoundException("Video not found with id " + idVideo);

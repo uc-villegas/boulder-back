@@ -11,6 +11,5 @@ public class UpdateVideoRequest {
 
     private String title;
     private String description;
-    private int duration;
 
 }

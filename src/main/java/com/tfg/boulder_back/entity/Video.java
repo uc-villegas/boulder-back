@@ -32,9 +32,6 @@ public class Video {
     @Column(name = "url", nullable = false, unique = true, length = 100)
     private String url;
 
-    @Column(name = "duration", nullable = false)
-    private int duration;
-
     @Column(name = "publication_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date publicationDate;

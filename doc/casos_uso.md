@@ -17,7 +17,7 @@ Sin tener una cuenta de cliente, un invitado puede:
   - Podrá ver detalles del rocódromo al que pertenece la via que ha escaneado. (Nombre, dirección, localidad, telefono...)
   - Podrá ver detalles de la propia via. (Nombre, dificultad, color, fecha de creación...).
   - Podrá ver la lista de vídeos que han sido subidos a esa vía.
-  - Podrá ver datos de los videos (Nombre del autor, duración...).
+  - Podrá ver datos de los videos (Nombre del autor...).
   - Podrá reproducir los vídeos desde la propia aplicación.
   - Podrá volver a la pantalla inicial de Login.
   - En ningun caso podrá navegar en la app para ver el resto de vías y rocódromos.
@@ -121,8 +121,6 @@ De todas formas, a nivel de este TFG podemos asumir que el QR de una vía es ún
 - `id_video`: Identificador único del video, interno a la aplicación, numérico y único globalmente por sencillez.
 
 - `descripción`:  Pequeño campo para decribir el video. Opcional.
-- 
-- `duración`: Duración desde que empieza a escalar hasta que termina.
 
 - `fecha de publicación`: Fecha de publicación del video. Para poder filtrar los más recientes, por ejemplo.
 
