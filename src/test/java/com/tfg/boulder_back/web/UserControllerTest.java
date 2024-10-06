@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class UserControllerTest {
+class UserControllerTest {
 
     @Mock
     private UserService userService;
