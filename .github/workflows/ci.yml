@@ -33,7 +33,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: SonarCloud Scan
-        run: mvn clean verify sonar:sonar -Dsonar.projectKey=boulder-back -Dsonar.organization=uc-villegas -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.branch.name=${{ github.ref_name }}
+        run: mvn clean verify sonar:sonar -Dsonar.projectKey=uc-villegas_boulder-back -Dsonar.organization=uc-villegas -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
 
 
