@@ -83,7 +83,6 @@
             "title": "MiVideo_1_Titulo",
             "description": "Escalando via 2",
             "url": "https://www.youtube.com/watch?v=crx_UJPjlrs",
-            "duration": 4,
             "user": {
                 "idUser": 1,
                 "name": "Pablo"
@@ -162,7 +161,6 @@
     {
     "title": "MiVideo_1_Titulo",
     "description": "Escalando via 1",
-    "duration": 2,
     }
   
   - JSON Response
@@ -170,7 +168,6 @@
     "idVideo": 2,
     "title": "MiVideo_1_Titulo",
     "description": "Escalando via 1",
-    "duration": 2,
     "url": "xyz.youtube.com",
     "publicationDate": "24-08-2024"
     "user": 1,

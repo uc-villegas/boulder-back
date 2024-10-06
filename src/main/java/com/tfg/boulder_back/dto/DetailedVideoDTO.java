@@ -13,6 +13,5 @@ public class DetailedVideoDTO {
     private String title;
     private String description;
     private String url;
-    private int duration;
 
 }
