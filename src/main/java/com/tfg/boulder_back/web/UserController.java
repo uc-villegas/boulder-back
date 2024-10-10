@@ -33,6 +33,9 @@ public class UserController {
         } catch (EmailAlreadyExistsException e) {
             log.error("Email already in use: " + newUser.getEmail(), e);
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        } catch(IllegalArgumentException e) {
+            log.error("Some required fields are empty", e);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         } catch(Exception e) {
             log.error("Error while adding new user", e);
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
