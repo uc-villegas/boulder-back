@@ -62,9 +62,13 @@ public class RouteServiceImpl implements RouteService {
                 throw new IllegalArgumentException("El tipo de la ruta no puede estar vacío");
             }
 
+            if (!isValidTypeRoute(routeRequest.getTypeRoute().toString())) {
+                throw new InvalidTypeException("El tipo de la ruta debe ser 'BOULDER' o 'WALL_ROUTE'");
+            }
+
             int numNivel = routeRequest.getNum_nivel();
             if (numNivel < 1 || numNivel > 10) {
-                throw new IllegalArgumentException("El nivel de la ruta debe estar entre 1 y 10");
+                throw new InvalidLevelException("El nivel de la ruta debe estar entre 1 y 10");
             }
 
             if (routeRequest.getPresa() == null || routeRequest.getPresa().isEmpty()) {
@@ -241,5 +245,9 @@ public class RouteServiceImpl implements RouteService {
             route.setNum_nivel(routeModified.getNum_nivel());
         }
 
+    }
+
+    private boolean isValidTypeRoute(String typeRoute) {
+        return "BOULDER".equalsIgnoreCase(typeRoute) || "WALL_ROUTE".equalsIgnoreCase(typeRoute);
     }
 }
