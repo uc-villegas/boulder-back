@@ -6,14 +6,14 @@ import com.tfg.boulder_back.entity.Boulder;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.User;
 import com.tfg.boulder_back.entity.Video;
-import com.tfg.boulder_back.exceptions.BoulderNotFoundException;
-import com.tfg.boulder_back.exceptions.RouteNotFoundException;
+import com.tfg.boulder_back.exceptions.*;
 import com.tfg.boulder_back.repository.BoulderRepository;
 import com.tfg.boulder_back.repository.RouteRepository;
 import com.tfg.boulder_back.repository.VideoRepository;
 import com.tfg.boulder_back.service.RouteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -36,49 +36,57 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Route addRouteAndLoadData(AddRouteRequest routeRequest) {
 
-        Optional<Boulder> optionalBoulder = boulderRepository.findById(routeRequest.getIdBoulder());
+            Optional<Boulder> optionalBoulder = boulderRepository.findById(routeRequest.getIdBoulder());
 
-        if (optionalBoulder.isEmpty()) {
-            throw new BoulderNotFoundException("Boulder not found with ID: " + routeRequest.getIdBoulder());
-        }
+            if (optionalBoulder.isEmpty()) {
+                throw new BoulderNotFoundException("Boulder not found with ID: " + routeRequest.getIdBoulder());
+            }
 
-        if (routeRequest.getQrRoute() == null || routeRequest.getQrRoute().isEmpty()) {
-            throw new IllegalArgumentException("El QR de la ruta no puede estar vacío");
-        }
+            if (routeRepository.existsByQrRoute(routeRequest.getQrRoute())) {
+                throw new QrRouteAlreadyExistsException("Ya existe una ruta con el mismo QR: " + routeRequest.getQrRoute());
+            }
 
-        if (routeRequest.getName() == null || routeRequest.getName().isEmpty()) {
-            throw new IllegalArgumentException("El nombre de la ruta no puede estar vacío");
-        }
+            if (routeRepository.existsByName(routeRequest.getName())) {
+                throw new RouteNameAlreadyExistsException("Ya existe una ruta con el mismo nombre: " + routeRequest.getName());
+            }
 
-        if (routeRequest.getTypeRoute() == null) {
-            throw new IllegalArgumentException("El tipo de la ruta no puede estar vacío");
-        }
+            if (routeRequest.getQrRoute() == null || routeRequest.getQrRoute().isEmpty()) {
+                throw new IllegalArgumentException("El QR de la ruta no puede estar vacío");
+            }
 
-        int numNivel = routeRequest.getNum_nivel();
-        if (numNivel < 1 || numNivel > 10) {
-            throw new IllegalArgumentException("El nivel de la ruta debe estar entre 1 y 10");
-        }
+            if (routeRequest.getName() == null || routeRequest.getName().isEmpty()) {
+                throw new IllegalArgumentException("El nombre de la ruta no puede estar vacío");
+            }
 
-        if (routeRequest.getPresa() == null || routeRequest.getPresa().isEmpty()) {
-            throw new IllegalArgumentException("El color de las presas no puede estar vacío");
-        }
+            if (routeRequest.getTypeRoute() == null) {
+                throw new IllegalArgumentException("El tipo de la ruta no puede estar vacío");
+            }
 
-        log.info("Boulder found with ID: " + routeRequest.getIdBoulder());
-        Boulder boulder = optionalBoulder.get();
+            int numNivel = routeRequest.getNum_nivel();
+            if (numNivel < 1 || numNivel > 10) {
+                throw new IllegalArgumentException("El nivel de la ruta debe estar entre 1 y 10");
+            }
 
-        Route route = new Route();
-        route.setQrRoute(routeRequest.getQrRoute());
-        route.setName(routeRequest.getName());
-        route.setTypeRoute(routeRequest.getTypeRoute());
-        route.setPresa(routeRequest.getPresa());
-        route.setCreationDate(new Date());
-        route.setNum_nivel(routeRequest.getNum_nivel());
-        route.setBoulder(boulder);
+            if (routeRequest.getPresa() == null || routeRequest.getPresa().isEmpty()) {
+                throw new IllegalArgumentException("El color de las presas no puede estar vacío");
+            }
 
-        routeRepository.save(route);
-        boulderRepository.save(boulder);
+            log.info("Boulder found with ID: " + routeRequest.getIdBoulder());
+            Boulder boulder = optionalBoulder.get();
 
-        return route;
+            Route route = new Route();
+            route.setQrRoute(routeRequest.getQrRoute());
+            route.setName(routeRequest.getName());
+            route.setTypeRoute(routeRequest.getTypeRoute());
+            route.setPresa(routeRequest.getPresa());
+            route.setCreationDate(new Date());
+            route.setNum_nivel(routeRequest.getNum_nivel());
+            route.setBoulder(boulder);
+
+            routeRepository.save(route);
+            boulderRepository.save(boulder);
+
+            return route;
     }
 
     @Override

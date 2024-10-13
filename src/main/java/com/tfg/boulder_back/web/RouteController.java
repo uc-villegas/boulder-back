@@ -7,6 +7,10 @@ import com.tfg.boulder_back.dto.RoutesDTO;
 import com.tfg.boulder_back.dto.VideoDTO;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.DuplicateVideoUrlException;
+import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
+import com.tfg.boulder_back.exceptions.QrRouteAlreadyExistsException;
+import com.tfg.boulder_back.exceptions.RouteNameAlreadyExistsException;
 import com.tfg.boulder_back.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +47,12 @@ public class RouteController {
         try{
             log.info("addRoute called");
             return new ResponseEntity<>(routeService.addRouteAndLoadData(request), HttpStatus.CREATED);
+        } catch (QrRouteAlreadyExistsException e) {
+            log.error("QR already in use: " + request.getQrRoute(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        } catch (RouteNameAlreadyExistsException e) {
+            log.error("Name already in use: " + request.getName(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }catch(IllegalArgumentException e){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // TODO: Cambiar el null
         }catch(Exception e){
