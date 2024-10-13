@@ -40,6 +40,14 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video addVideo(AddVideoRequest videoRequest, Long userId, String boulderName, String routeName) {
 
+        if (videoRequest.getTitle() == null || videoRequest.getTitle().isEmpty()) {
+            throw new IllegalArgumentException("El título no puede estar vacío");
+        }
+
+        if (videoRequest.getUrl() == null || videoRequest.getUrl().isEmpty()) {
+            throw new IllegalArgumentException("El enlace no puede estar vacío");
+        }
+
         try {
             Optional<Route> optionalRoute = routeRepository.findByName(routeName);
             if (optionalRoute.isEmpty()) {
