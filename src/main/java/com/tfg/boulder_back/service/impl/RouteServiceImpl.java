@@ -42,6 +42,27 @@ public class RouteServiceImpl implements RouteService {
             throw new BoulderNotFoundException("Boulder not found with ID: " + routeRequest.getIdBoulder());
         }
 
+        if (routeRequest.getQrRoute() == null || routeRequest.getQrRoute().isEmpty()) {
+            throw new IllegalArgumentException("El QR de la ruta no puede estar vacío");
+        }
+
+        if (routeRequest.getName() == null || routeRequest.getName().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la ruta no puede estar vacío");
+        }
+
+        if (routeRequest.getTypeRoute() == null) {
+            throw new IllegalArgumentException("El tipo de la ruta no puede estar vacío");
+        }
+
+        int numNivel = routeRequest.getNum_nivel();
+        if (numNivel < 1 || numNivel > 10) {
+            throw new IllegalArgumentException("El nivel de la ruta debe estar entre 1 y 10");
+        }
+
+        if (routeRequest.getPresa() == null || routeRequest.getPresa().isEmpty()) {
+            throw new IllegalArgumentException("El color de las presas no puede estar vacío");
+        }
+
         log.info("Boulder found with ID: " + routeRequest.getIdBoulder());
         Boulder boulder = optionalBoulder.get();
 

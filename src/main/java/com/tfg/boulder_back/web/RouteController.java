@@ -43,6 +43,8 @@ public class RouteController {
         try{
             log.info("addRoute called");
             return new ResponseEntity<>(routeService.addRouteAndLoadData(request), HttpStatus.CREATED);
+        }catch(IllegalArgumentException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // TODO: Cambiar el null
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
         }
