@@ -31,6 +31,10 @@ C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\bou
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\BoulderPropertyNotFoundException.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\DuplicateVideoUrlException.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\EmailAlreadyExistsException.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\InvalidLevelException.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\InvalidTypeException.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\QrRouteAlreadyExistsException.java
+C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\RouteNameAlreadyExistsException.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\RouteNotFoundException.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\UserNotFoundException.java
 C:\Users\Pablo\Desktop\Proyectos\TFG_Demo\boulder-back\src\main\java\com\tfg\boulder_back\exceptions\VideoNotFoundException.java
