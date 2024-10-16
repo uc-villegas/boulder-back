@@ -1,6 +1,7 @@
 package com.tfg.boulder_back.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,17 +24,16 @@ public class Video {
     @Pattern(regexp = "\\d")
     private Long id;
 
+    @NotEmpty
     @Column(name = "title", nullable = false, length = 100)
     private String title;
 
     @Column(name = "description", nullable = true, length = 500)
     private String description;
 
+    @NotEmpty
     @Column(name = "url", nullable = false, unique = true, length = 100)
     private String url;
-
-    @Column(name = "duration", nullable = false)
-    private int duration;
 
     @Column(name = "publication_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

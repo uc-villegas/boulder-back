@@ -22,4 +22,7 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
     List<Route> findAllByIdBoulder(@Param("idBoulder") Long idBoulder);
 
     Optional<Route> findByName(String routeName);
+
+    boolean existsByQrRoute(String qrRoute);
+    boolean existsByName(String name);
 }

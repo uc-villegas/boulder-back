@@ -2,6 +2,7 @@ package com.tfg.boulder_back.entity;
 
 import com.tfg.boulder_back.constants.TypeUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,15 +22,19 @@ public class User {
     @Pattern(regexp = "\\d")
     private Long id;
 
+    @NotEmpty
     @Column(name = "name", nullable = false, length = 50)
     private String name; // TODO: pattern Revisar campos ""
 
+    @NotEmpty
     @Column(name = "surname", nullable = true, length = 50)
     private String surname; // TODO: pattern
 
+    @NotEmpty
     @Column(name = "mail", nullable = false, unique = true, length = 50)
     private String email; // TODO: pattern
 
+    @NotEmpty
     @Column(name = "password", nullable = false, length = 50)
     private String password; // TODO: pattern
 

@@ -39,6 +39,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(User user) {
 
+        if (user.getName() == null || user.getName().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("El email no puede estar vacío");
+        }
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede estar vacía");
+        }
+
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email " + user.getEmail() + " is already in use.");
         }
@@ -134,7 +144,6 @@ public class UserServiceImpl implements UserService {
         dto.setTitle(video.getTitle());
         dto.setDescription(video.getDescription());
         dto.setUrl(video.getUrl());
-        dto.setDuration(video.getDuration());
 
         return dto;
     }

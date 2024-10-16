@@ -19,9 +19,6 @@ public class AddVideoRequest {
     @NotNull
     private String url;
 
-    @NotNull
-    private int duration;
-
     private Date publicationDate;
 
 }

@@ -40,6 +40,14 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video addVideo(AddVideoRequest videoRequest, Long userId, String boulderName, String routeName) {
 
+        if (videoRequest.getTitle() == null || videoRequest.getTitle().isEmpty()) {
+            throw new IllegalArgumentException("El título no puede estar vacío");
+        }
+
+        if (videoRequest.getUrl() == null || videoRequest.getUrl().isEmpty()) {
+            throw new IllegalArgumentException("El enlace no puede estar vacío");
+        }
+
         try {
             Optional<Route> optionalRoute = routeRepository.findByName(routeName);
             if (optionalRoute.isEmpty()) {
@@ -64,7 +72,6 @@ public class VideoServiceImpl implements VideoService {
             videoToAdd.setDescription(videoRequest.getDescription());
             videoToAdd.setTitle(videoRequest.getTitle());
             videoToAdd.setUrl(videoRequest.getUrl());
-            videoToAdd.setDuration(videoRequest.getDuration());
             videoToAdd.setPublicationDate(new Date());
 
             videoRepository.save(videoToAdd);
@@ -99,7 +106,6 @@ public class VideoServiceImpl implements VideoService {
             Video video = optionalVideo.get();
             video.setTitle(updateVideoRequest.getTitle());
             video.setDescription(updateVideoRequest.getDescription());
-            video.setDuration(updateVideoRequest.getDuration());
             return videoRepository.save(video);
         } else {
             throw new VideoNotFoundException("Video not found with id " + idVideo);

@@ -3,6 +3,8 @@ package com.tfg.boulder_back.web;
 import com.tfg.boulder_back.domain.request.AddVideoRequest;
 import com.tfg.boulder_back.domain.request.UpdateVideoRequest;
 import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.DuplicateVideoUrlException;
+import com.tfg.boulder_back.exceptions.EmailAlreadyExistsException;
 import com.tfg.boulder_back.exceptions.VideoNotFoundException;
 import com.tfg.boulder_back.service.VideoService;
 import org.slf4j.Logger;
@@ -29,6 +31,12 @@ public class VideoController {
         log.info("Adding video: {}", video.getUrl());
         try{
             return new ResponseEntity<>(videoService.addVideo(video, userId, boulderName, routeName), HttpStatus.CREATED);
+        } catch(IllegalArgumentException e) {
+            log.error("Some required fields are empty", e);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        } catch (DuplicateVideoUrlException e) {
+            log.error("Url already in use: " + video.getUrl(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

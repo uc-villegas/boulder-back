@@ -7,12 +7,14 @@ import com.tfg.boulder_back.dto.RoutesDTO;
 import com.tfg.boulder_back.dto.VideoDTO;
 import com.tfg.boulder_back.entity.Route;
 import com.tfg.boulder_back.entity.Video;
+import com.tfg.boulder_back.exceptions.*;
 import com.tfg.boulder_back.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,10 +41,24 @@ public class RouteController {
     }
 
     @PostMapping(value = "/boulder/via/enrollment")
-    public ResponseEntity<Route> addRoute(@RequestBody AddRouteRequest request) {
+    public ResponseEntity<Object> addRoute(@RequestBody AddRouteRequest request) {
         try{
             log.info("addRoute called");
             return new ResponseEntity<>(routeService.addRouteAndLoadData(request), HttpStatus.CREATED);
+        } catch (InvalidTypeException e) {
+            log.error("Invalid type: " + request.getTypeRoute(), e);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        } catch (InvalidLevelException e) {
+            log.error("Invalid level: " + request.getNum_nivel(), e);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        } catch (QrRouteAlreadyExistsException e) {
+            log.error("QR already in use: " + request.getQrRoute(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        } catch (RouteNameAlreadyExistsException e) {
+            log.error("Name already in use: " + request.getName(), e);
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }catch(IllegalArgumentException e){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // TODO: Cambiar el null
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // TODO: Cambiar el null
         }

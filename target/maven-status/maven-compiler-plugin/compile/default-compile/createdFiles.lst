@@ -12,6 +12,7 @@ com\tfg\boulder_back\exceptions\VideoNotFoundException.class
 com\tfg\boulder_back\dto\RoutesDTO.class
 com\tfg\boulder_back\dto\DetailedRouteDTO.class
 com\tfg\boulder_back\dto\UserHomeDTO.class
+com\tfg\boulder_back\exceptions\QrRouteAlreadyExistsException.class
 com\tfg\boulder_back\service\UserService.class
 com\tfg\boulder_back\domain\request\AddRouteRequest.class
 com\tfg\boulder_back\dto\VideoDTO.class
@@ -22,6 +23,7 @@ com\tfg\boulder_back\exceptions\UserNotFoundException.class
 com\tfg\boulder_back\web\UserController.class
 com\tfg\boulder_back\entity\Route.class
 com\tfg\boulder_back\dto\UserDTO.class
+com\tfg\boulder_back\exceptions\InvalidLevelException.class
 com\tfg\boulder_back\service\VideoService.class
 com\tfg\boulder_back\repository\RouteRepository.class
 com\tfg\boulder_back\constants\TypeUser.class
@@ -34,7 +36,9 @@ com\tfg\boulder_back\entity\Boulder.class
 com\tfg\boulder_back\entity\Video.class
 com\tfg\boulder_back\service\impl\BoulderServiceImpl.class
 com\tfg\boulder_back\BoulderBackApplication.class
+com\tfg\boulder_back\exceptions\InvalidTypeException.class
 com\tfg\boulder_back\dto\RouteEditDTO.class
+com\tfg\boulder_back\exceptions\RouteNameAlreadyExistsException.class
 com\tfg\boulder_back\domain\response\UserDetails.class
 com\tfg\boulder_back\web\RouteController.class
 com\tfg\boulder_back\repository\BoulderRepository.class
